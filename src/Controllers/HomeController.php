@@ -32,7 +32,19 @@ class HomeController
             'event' => [
                 'date' => '2025',
                 'location' => 'Abidjan, Côte d\'Ivoire',
-                'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement'
+                'theme' => 'Accélérer la transition écologique pour une Afrique durable et résiliente: innovations, stratégies et collaborations',
+                'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
+                'presentation' => [
+                    'intro' => 'Rejoignez-nous pour la nouvelle édition de l\'Africa QSHE Forum, le rendez-vous incontournable des professionnels de la Qualité, Santé, Sécurité au Travail et Environnement en Afrique.',
+                    'details' => 'Cette plateforme d\'échange unique rassemble experts, décideurs et innovateurs autour du thème de la transition écologique.',
+                    'programme' => [
+                        'Conférences inspirantes',
+                        'Panels d\'experts',
+                        'Sessions de networking',
+                        'Partage des meilleures pratiques'
+                    ],
+                    'objectif' => 'Saisissez cette opportunité de contribuer à la transformation écologique de l\'Afrique tout en développant votre réseau professionnel.'
+                ]
             ],
             'speakers' => $this->getRandomSpeakers()
         ];

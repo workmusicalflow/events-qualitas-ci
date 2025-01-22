@@ -22,6 +22,9 @@
             height: 100%;
             border: 0;
         }
+        .theme-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -58,18 +61,23 @@
     </nav>
 
     {# Bannière #}
-    <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20">
+    <header class="theme-gradient text-white py-20">
         <div class="container mx-auto px-4">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ title }}</h1>
-                <p class="text-xl mb-8">{{ event.description }}</p>
-                <div class="bg-white/10 p-4 rounded-lg inline-block mb-8">
-                    <p class="text-lg">
-                        <i class="fas fa-calendar-alt mr-2"></i>
-                        <span class="font-bold">{{ event.date }}</span> • 
-                        <i class="fas fa-map-marker-alt ml-2 mr-1"></i>
-                        <span>{{ event.location }}</span>
-                    </p>
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ title }} {{ event.date }}</h1>
+                <p class="text-xl mb-8 font-light">{{ event.description }}</p>
+                <div class="bg-white/10 p-6 rounded-lg mb-8">
+                    <h2 class="text-2xl font-semibold mb-4">{{ event.theme }}</h2>
+                    <div class="flex items-center justify-center space-x-8">
+                        <p class="text-lg">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="font-bold">{{ event.date }}</span>
+                        </p>
+                        <p class="text-lg">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>{{ event.location }}</span>
+                        </p>
+                    </div>
                 </div>
                 <div>
                     <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
@@ -82,15 +90,42 @@
     </header>
 
     {# Présentation de l'événement #}
-    <section class="py-16 bg-white">
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-6">À propos de l'événement</h2>
-                <p class="text-gray-700 text-lg mb-8">{{ description }}</p>
-                <a href="https://events-qualitas-ci.com/formulaire.html" 
-                   class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block">
-                    <i class="fas fa-id-badge mr-2"></i>Générer mon badge de visite
-                </a>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <p class="text-2xl text-gray-700 leading-relaxed mb-8">{{ event.presentation.intro }}</p>
+                    <p class="text-xl text-gray-600 mb-12">{{ event.presentation.details }}</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-blue-50 p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-900 mb-6">
+                            <i class="fas fa-calendar-check mr-2"></i>Au programme
+                        </h3>
+                        <ul class="space-y-4">
+                            {% for item in event.presentation.programme %}
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-700">{{ item }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-green-900 mb-6">
+                            <i class="fas fa-bullseye mr-2"></i>Notre objectif
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed">{{ event.presentation.objectif }}</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="https://events-qualitas-ci.com/formulaire.html" 
+                       class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block">
+                        <i class="fas fa-id-badge mr-2"></i>Générer mon badge de visite
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -103,7 +138,7 @@
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {% for speaker in speakers %}
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                         <img src="{{ speaker.photo }}" alt="{{ speaker.name }}" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="font-bold text-xl mb-2">{{ speaker.name }}</h3>
@@ -135,7 +170,7 @@
                 {% for i in 1..8 %}
                     <img src="https://via.placeholder.com/200x100?text=Partenaire+{{ i }}" 
                          alt="Partenaire {{ i }}" 
-                         class="max-w-[150px]">
+                         class="max-w-[150px] hover:opacity-80 transition-opacity duration-300">
                 {% endfor %}
             </div>
             <div class="text-center">
@@ -184,7 +219,7 @@
                     <img src="https://via.placeholder.com/200x80?text=Organisateur" 
                          alt="Logo Organisateur" 
                          class="h-12 mb-4">
-                    <p class="text-blue-200">Le forum international de référence en Afrique pour la QHSE</p>
+                    <p class="text-blue-200">{{ event.description }}</p>
                 </div>
                 <div>
                     <h3 class="font-bold text-lg mb-4">
@@ -202,10 +237,10 @@
                         <i class="fas fa-share-alt mr-2"></i>Suivez-nous
                     </h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-white text-2xl">
+                        <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors duration-300">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="text-blue-200 hover:text-white text-2xl">
+                        <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors duration-300">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
