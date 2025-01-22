@@ -47,6 +47,36 @@ composer install
    - Dossiers : 755
    - Scripts exécutables : 755
 
+## 🎨 Ressources Externes
+
+### Font Awesome
+
+Le projet utilise Font Awesome pour les icônes. Voici comment l'intégrer :
+
+1. Ajoutez le script suivant dans le `<head>` de vos templates :
+
+```html
+<script
+  src="https://kit.fontawesome.com/01691af9f6.js"
+  crossorigin="anonymous"
+></script>
+```
+
+2. Utilisation des icônes :
+
+```html
+<!-- Exemple d'utilisation -->
+<i class="fas fa-calendar"></i>
+<!-- Icône de calendrier -->
+<i class="fas fa-map-marker-alt"></i>
+<!-- Icône de localisation -->
+```
+
+### Autres CDN
+
+- Tailwind CSS : v2.2.19
+- Alpine.js : v3.x.x
+
 ## 🔗 Liens Externes
 
 - Badge de participation : https://events-qualitas-ci.com/formulaire.html
@@ -117,6 +147,7 @@ La structure de la page doit suivre l'ordre de défilement suivant :
 - **HTML** : Respecter la structure de base
 - **Tailwind CSS** pour un design responsive et moderne
 - **Alpine.js** pour l'interactivité
+- **Font Awesome** pour les icônes
 - **Vanilla JS** pour fonctionnalités spécifiques
 - **PHP** (POO) comme langage principal
 - **Architecture** : MVC avec Twig pour le templating
@@ -131,6 +162,7 @@ La structure de la page doit suivre l'ordre de défilement suivant :
 - [x] Mise en place d'un routeur simple
 - [x] Création d'un contrôleur et template de base
 - [x] Lancement du serveur de développement
+- [x] Intégration de Font Awesome
 
 ## Tâches en cours
 

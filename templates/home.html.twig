@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/01691af9f6.js" crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         .map-container {
@@ -34,9 +35,7 @@
                 
                 {# Menu Mobile Burger #}
                 <button @click="isOpen = !isOpen" class="md:hidden">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
+                    <i class="fas fa-bars text-2xl"></i>
                 </button>
 
                 {# Menu Items #}
@@ -66,14 +65,16 @@
                 <p class="text-xl mb-8">{{ event.description }}</p>
                 <div class="bg-white/10 p-4 rounded-lg inline-block mb-8">
                     <p class="text-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i>
                         <span class="font-bold">{{ event.date }}</span> • 
+                        <i class="fas fa-map-marker-alt ml-2 mr-1"></i>
                         <span>{{ event.location }}</span>
                     </p>
                 </div>
                 <div>
                     <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
                        class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg inline-block">
-                        Devenir Exposant
+                        <i class="fas fa-user-plus mr-2"></i>Devenir Exposant
                     </a>
                 </div>
             </div>
@@ -88,7 +89,7 @@
                 <p class="text-gray-700 text-lg mb-8">{{ description }}</p>
                 <a href="https://events-qualitas-ci.com/formulaire.html" 
                    class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block">
-                    Générer mon badge de visite
+                    <i class="fas fa-id-badge mr-2"></i>Générer mon badge de visite
                 </a>
             </div>
         </div>
@@ -97,22 +98,28 @@
     {# Intervenants #}
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Nos Intervenants</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-users mr-2"></i>Nos Intervenants
+            </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {% for speaker in speakers %}
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                         <img src="{{ speaker.photo }}" alt="{{ speaker.name }}" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="font-bold text-xl mb-2">{{ speaker.name }}</h3>
-                            <p class="text-gray-600 mb-1">{{ speaker.position }}</p>
-                            <p class="text-blue-900">{{ speaker.company }}</p>
+                            <p class="text-gray-600 mb-1">
+                                <i class="fas fa-briefcase mr-2"></i>{{ speaker.position }}
+                            </p>
+                            <p class="text-blue-900">
+                                <i class="fas fa-building mr-2"></i>{{ speaker.company }}
+                            </p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
             <div class="text-center mt-12">
                 <a href="/intervenants" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block">
-                    Découvrir la liste complète
+                    <i class="fas fa-users mr-2"></i>Découvrir la liste complète
                 </a>
             </div>
         </div>
@@ -121,7 +128,9 @@
     {# Partenaires #}
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Nos Partenaires</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-handshake mr-2"></i>Nos Partenaires
+            </h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center mb-12">
                 {% for i in 1..8 %}
                     <img src="https://via.placeholder.com/200x100?text=Partenaire+{{ i }}" 
@@ -132,7 +141,7 @@
             <div class="text-center">
                 <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
                    class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block">
-                    Devenir Partenaire (Sponsor)
+                    <i class="fas fa-handshake mr-2"></i>Devenir Partenaire (Sponsor)
                 </a>
             </div>
         </div>
@@ -141,7 +150,9 @@
     {# Plan du lieu #}
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Lieu de l'événement</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-map-marked-alt mr-2"></i>Lieu de l'événement
+            </h2>
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <div class="map-container">
@@ -153,8 +164,12 @@
                         </iframe>
                     </div>
                     <div class="p-6 text-center">
-                        <p class="text-xl font-bold text-blue-900">{{ event.location }}</p>
-                        <p class="text-gray-600">{{ event.date }}</p>
+                        <p class="text-xl font-bold text-blue-900">
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location }}
+                        </p>
+                        <p class="text-gray-600">
+                            <i class="fas fa-calendar-alt mr-2"></i>{{ event.date }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -172,30 +187,34 @@
                     <p class="text-blue-200">Le forum international de référence en Afrique pour la QHSE</p>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg mb-4">Contact</h3>
-                    <p class="text-blue-200">Email : contact@africaqsheforum.com</p>
-                    <p class="text-blue-200">Tél : +225 XX XX XX XX</p>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-address-card mr-2"></i>Contact
+                    </h3>
+                    <p class="text-blue-200">
+                        <i class="fas fa-envelope mr-2"></i>Email : contact@africaqsheforum.com
+                    </p>
+                    <p class="text-blue-200">
+                        <i class="fas fa-phone mr-2"></i>Tél : +225 XX XX XX XX
+                    </p>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg mb-4">Suivez-nous</h3>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-share-alt mr-2"></i>Suivez-nous
+                    </h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-white">
-                            <span class="sr-only">Facebook</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5h-4.33C10.24.5,9.5,3.44,9.5,5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4Z"/>
-                            </svg>
+                        <a href="#" class="text-blue-200 hover:text-white text-2xl">
+                            <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="text-blue-200 hover:text-white">
-                            <span class="sr-only">LinkedIn</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447,20.452H16.893V14.883c0-1.328-.027-3.037-1.852-3.037-1.853,0-2.136,1.445-2.136,2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9,1.637-1.85,3.37-1.85,3.601,0,4.267,2.37,4.267,5.455v6.286ZM5.337,7.433c-1.144,0-2.063-.926-2.063-2.065,0-1.138.92-2.063,2.063-2.063,1.14,0,2.064.925,2.064,2.063,0,1.139-.925,2.065-2.064,2.065Zm2.062,13.019H3.274V9H7.4v11.452ZM22.225,0H1.771C.792,0,0,.774,0,1.729v20.542C0,23.227.792,24,1.771,24h20.451C23.2,24,24,23.227,24,22.271V1.729C24,.774,23.2,0,22.222,0h.003Z"/>
-                            </svg>
+                        <a href="#" class="text-blue-200 hover:text-white text-2xl">
+                            <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-blue-800 text-center">
-                <p class="text-blue-200">&copy; {{ "now"|date("Y") }} Africa QSHE Forum. Tous droits réservés.</p>
+                <p class="text-blue-200">
+                    <i class="far fa-copyright mr-2"></i>{{ "now"|date("Y") }} Africa QSHE Forum. Tous droits réservés.
+                </p>
             </div>
         </div>
     </footer>
