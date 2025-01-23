@@ -25,6 +25,14 @@
         .theme-gradient {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         }
+        .logo-container {
+            height: 50px;
+        }
+        @media (max-width: 768px) {
+            .logo-container {
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -32,8 +40,13 @@
     <nav class="bg-blue-900 text-white" x-data="{ isOpen: false }">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <img src="{{ menu.logo }}" alt="Logo Africa QSHE Forum" class="h-12">
+                <div class="flex items-center logo-container">
+                    <picture>
+                        <source srcset="/images/logo/logo-qshe.svg" type="image/svg+xml">
+                        <img src="/images/logo/logo-qshe.png" 
+                             alt="Logo Africa QSHE Forum" 
+                             class="h-full w-auto">
+                    </picture>
                 </div>
                 
                 {# Menu Mobile Burger #}
@@ -216,9 +229,14 @@
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8">
                 <div>
-                    <img src="https://via.placeholder.com/200x80?text=Organisateur" 
-                         alt="Logo Organisateur" 
-                         class="h-12 mb-4">
+                    <div class="h-12 mb-4">
+                        <picture>
+                            <source srcset="/images/logo/logo-qshe-monochrome.svg" type="image/svg+xml">
+                            <img src="/images/logo/logo-qshe-monochrome.png" 
+                                 alt="Logo Africa QSHE Forum" 
+                                 class="h-full w-auto">
+                        </picture>
+                    </div>
                     <p class="text-blue-200">{{ event.description }}</p>
                 </div>
                 <div>
