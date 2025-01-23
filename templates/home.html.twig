@@ -25,11 +25,18 @@
         .theme-gradient {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         }
-        .logo-container {
+        .nav-logo {
+            display: block;
             height: 50px;
+            width: auto;
+        }
+        .nav-logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
         }
         @media (max-width: 768px) {
-            .logo-container {
+            .nav-logo {
                 height: 40px;
             }
         }
@@ -40,14 +47,13 @@
     <nav class="bg-blue-900 text-white" x-data="{ isOpen: false }">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <div class="flex items-center logo-container">
+                <a href="/" class="nav-logo">
                     <picture>
                         <source srcset="/images/logo/logo-qshe.svg" type="image/svg+xml">
                         <img src="/images/logo/logo-qshe.png" 
-                             alt="Logo Africa QSHE Forum" 
-                             class="h-full w-auto">
+                             alt="Logo Africa QSHE Forum">
                     </picture>
-                </div>
+                </a>
                 
                 {# Menu Mobile Burger #}
                 <button @click="isOpen = !isOpen" class="md:hidden">
