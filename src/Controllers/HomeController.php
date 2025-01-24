@@ -19,7 +19,11 @@ class HomeController
             'title' => 'Africa QSHE Forum',
             'description' => 'Bienvenue sur le site officiel du Africa QSHE Forum',
             'menu' => [
-                'logo' => 'https://via.placeholder.com/150x50?text=Africa+QSHE',
+                'logo' => [
+                    'svg' => '/images/logo/logo-qshe.svg',
+                    'png' => '/images/logo/logo-qshe.png',
+                    'alt' => 'Logo Africa QSHE Forum'
+                ],
                 'items' => [
                     [
                         'label' => 'Programme',
@@ -70,6 +74,18 @@ class HomeController
                         'Partage des meilleures pratiques'
                     ],
                     'objectif' => 'Saisissez cette opportunité de contribuer à la transformation écologique de l\'Afrique tout en développant votre réseau professionnel.'
+                ],
+                'logos' => [
+                    'header' => [
+                        'svg' => '/images/logo/logo-qshe.svg',
+                        'png' => '/images/logo/logo-qshe.png',
+                        'alt' => 'Logo Africa QSHE Forum'
+                    ],
+                    'footer' => [
+                        'svg' => '/images/logo/logo-qshe-monochrome.svg',
+                        'png' => '/images/logo/logo-qshe-monochrome.png',
+                        'alt' => 'Logo Africa QSHE Forum - Version monochrome'
+                    ]
                 ]
             ],
             'speakers' => $this->getRandomSpeakers()
