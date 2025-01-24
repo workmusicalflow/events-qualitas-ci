@@ -1,0 +1,72 @@
+{# Scripts externes essentiels #}
+<script src="https://kit.fontawesome.com/01691af9f6.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+{# Scripts GSAP pour les animations #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+{# Scripts personnalisés #}
+<script src="/js/banner-animations.js" defer></script>
+
+{# Configuration globale #}
+<script>
+    // Configuration Alpine.js
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('app', {
+            menuOpen: false,
+            darkMode: localStorage.getItem('darkMode') === 'true',
+            toggleDarkMode() {
+                this.darkMode = !this.darkMode;
+                localStorage.setItem('darkMode', this.darkMode);
+                document.documentElement.classList.toggle('dark', this.darkMode);
+            }
+        });
+    });
+
+    // Configuration GSAP globale
+    gsap.config({
+        nullTargetWarn: false,
+        trialWarn: false
+    });
+
+    // Utilitaires globaux
+    window.APP = {
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+
+        isMobile() {
+            return window.innerWidth < 768;
+        },
+
+        isTablet() {
+            return window.innerWidth >= 768 && window.innerWidth < 1024;
+        },
+
+        isDesktop() {
+            return window.innerWidth >= 1024;
+        }
+    };
+
+    // Gestion du chargement des images
+    document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        });
+    });
+</script>
+
+{# Scripts spécifiques à la page #}
+{% block page_scripts %}{% endblock %}
