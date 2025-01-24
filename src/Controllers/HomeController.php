@@ -21,12 +21,38 @@ class HomeController
             'menu' => [
                 'logo' => 'https://via.placeholder.com/150x50?text=Africa+QSHE',
                 'items' => [
-                    ['label' => 'Programme', 'url' => '/programme'],
-                    ['label' => 'Intervenants', 'url' => '/intervenants'],
-                    ['label' => 'Devenir exposant', 'url' => 'https://events-qualitas-ci.com/qshe25-b2b/public/'],
-                    ['label' => 'Partenaires', 'url' => '/partenaires'],
-                    ['label' => 'Badge de participation', 'url' => 'https://events-qualitas-ci.com/formulaire.html'],
-                    ['label' => 'Éditions précédentes', 'url' => '/editions-precedentes']
+                    [
+                        'label' => 'Programme',
+                        'url' => '/programme',
+                        'icon' => 'calendar-alt'
+                    ],
+                    [
+                        'label' => 'Intervenants',
+                        'url' => '/intervenants',
+                        'icon' => 'users'
+                    ],
+                    [
+                        'label' => 'Devenir exposant',
+                        'url' => 'https://events-qualitas-ci.com/qshe25-b2b/public/',
+                        'icon' => 'store',
+                        'external' => true
+                    ],
+                    [
+                        'label' => 'Partenaires',
+                        'url' => '/partenaires',
+                        'icon' => 'handshake'
+                    ],
+                    [
+                        'label' => 'Badge de participation',
+                        'url' => 'https://events-qualitas-ci.com/formulaire.html',
+                        'icon' => 'id-badge',
+                        'external' => true
+                    ],
+                    [
+                        'label' => 'Éditions précédentes',
+                        'url' => '/editions-precedentes',
+                        'icon' => 'history'
+                    ]
                 ]
             ],
             'event' => [
@@ -49,7 +75,7 @@ class HomeController
             'speakers' => $this->getRandomSpeakers()
         ];
 
-        echo $this->twig->render('home.html.twig', $data);
+        echo $this->twig->render('pages/home.html.twig', $data);
     }
 
     private function getRandomSpeakers()
@@ -59,37 +85,64 @@ class HomeController
                 'name' => 'John Doe',
                 'company' => 'Quality Corp',
                 'position' => 'Directeur QHSE',
-                'photo' => 'https://via.placeholder.com/300x400?text=John+Doe'
+                'photo' => 'https://via.placeholder.com/300x400?text=John+Doe',
+                'specialty' => 'Management QHSE',
+                'social' => [
+                    'linkedin' => '#',
+                    'twitter' => '#'
+                ]
             ],
             [
                 'name' => 'Marie Dubois',
                 'company' => 'Safety First',
                 'position' => 'Experte en Sécurité Industrielle',
-                'photo' => 'https://via.placeholder.com/300x400?text=Marie+Dubois'
+                'photo' => 'https://via.placeholder.com/300x400?text=Marie+Dubois',
+                'specialty' => 'Sécurité',
+                'social' => [
+                    'linkedin' => '#'
+                ]
             ],
             [
                 'name' => 'Ahmed Koné',
                 'company' => 'Green Africa',
                 'position' => 'Responsable Environnement',
-                'photo' => 'https://via.placeholder.com/300x400?text=Ahmed+Kone'
+                'photo' => 'https://via.placeholder.com/300x400?text=Ahmed+Kone',
+                'specialty' => 'Environnement',
+                'social' => [
+                    'linkedin' => '#',
+                    'twitter' => '#'
+                ]
             ],
             [
                 'name' => 'Sarah Johnson',
                 'company' => 'Health Solutions',
                 'position' => 'Consultante Santé au Travail',
-                'photo' => 'https://via.placeholder.com/300x400?text=Sarah+Johnson'
+                'photo' => 'https://via.placeholder.com/300x400?text=Sarah+Johnson',
+                'specialty' => 'Santé',
+                'social' => [
+                    'linkedin' => '#'
+                ]
             ],
             [
                 'name' => 'Pierre Kouassi',
                 'company' => 'ISO Consulting',
                 'position' => 'Expert Qualité',
-                'photo' => 'https://via.placeholder.com/300x400?text=Pierre+Kouassi'
+                'photo' => 'https://via.placeholder.com/300x400?text=Pierre+Kouassi',
+                'specialty' => 'Qualité',
+                'social' => [
+                    'linkedin' => '#',
+                    'twitter' => '#'
+                ]
             ],
             [
                 'name' => 'Emma Chen',
                 'company' => 'Global Standards',
                 'position' => 'Directrice Certification',
-                'photo' => 'https://via.placeholder.com/300x400?text=Emma+Chen'
+                'photo' => 'https://via.placeholder.com/300x400?text=Emma+Chen',
+                'specialty' => 'Certification',
+                'social' => [
+                    'linkedin' => '#'
+                ]
             ]
         ];
 
