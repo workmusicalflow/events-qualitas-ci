@@ -231,11 +231,13 @@
     </section>
 
     {# Footer #}
-    <footer class="bg-blue-900 text-white py-12">
+    <footer class="bg-blue-900 text-white py-16">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8">
+            {# Section principale du footer #}
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                {# Colonne 1 : Logo et présentation #}
                 <div>
-                    <div class="h-12 mb-4">
+                    <div class="h-12 mb-6">
                         <picture>
                             <source srcset="/images/logo/logo-qshe-monochrome.svg" type="image/svg+xml">
                             <img src="/images/logo/logo-qshe-monochrome.png" 
@@ -243,37 +245,128 @@
                                  class="h-full w-auto">
                         </picture>
                     </div>
-                    <p class="text-blue-200">{{ event.description }}</p>
+                    <p class="text-blue-200 mb-4">{{ event.description }}</p>
+                    <p class="text-blue-200">Un événement organisé par QUALITAS Côte d'Ivoire SA</p>
                 </div>
+
+                {# Colonne 2 : Adresse et coordonnées postales #}
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
+                    <h3 class="font-bold text-lg mb-6">
+                        <i class="fas fa-building mr-2"></i>Siège Social
+                    </h3>
+                    <div class="text-blue-200 space-y-3">
+                        <p>
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Abidjan Biétry, Immeuble le Home
+                        </p>
+                        <p>
+                            <i class="fas fa-mailbox mr-2"></i>
+                            18 BP 1646 Abidjan 18
+                        </p>
+                        <p>
+                            <i class="fas fa-globe-africa mr-2"></i>
+                            Côte d'Ivoire
+                        </p>
+                    </div>
+                </div>
+
+                {# Colonne 3 : Contacts #}
+                <div>
+                    <h3 class="font-bold text-lg mb-6">
                         <i class="fas fa-address-card mr-2"></i>Contact
                     </h3>
-                    <p class="text-blue-200">
-                        <i class="fas fa-envelope mr-2"></i>Email : contact@africaqsheforum.com
-                    </p>
-                    <p class="text-blue-200">
-                        <i class="fas fa-phone mr-2"></i>Tél : +225 XX XX XX XX
-                    </p>
+                    <div class="text-blue-200 space-y-3">
+                        <p>
+                            <i class="fas fa-phone mr-2"></i>
+                            <span class="font-semibold">Fixe :</span> 
+                            <a href="tel:+22527212416" class="hover:text-white transition-colors">
+                                +225 27 21 24 16 13
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fas fa-mobile-alt mr-2"></i>
+                            <span class="font-semibold">Mobile :</span>
+                            <a href="tel:+22507091300" class="hover:text-white transition-colors">
+                                +225 07 09 13 00 12
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:infosqualitas@gmail.com" class="hover:text-white transition-colors">
+                                infosqualitas@gmail.com
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@qualitas-ci.com" class="hover:text-white transition-colors">
+                                info@qualitas-ci.com
+                            </a>
+                        </p>
+                    </div>
                 </div>
+
+                {# Colonne 4 : Liens et réseaux sociaux #}
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-share-alt mr-2"></i>Suivez-nous
+                    <h3 class="font-bold text-lg mb-6">
+                        <i class="fas fa-link mr-2"></i>Liens Utiles
                     </h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors duration-300">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors duration-300">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
+                    <div class="text-blue-200 space-y-3">
+                        <p>
+                            <i class="fas fa-globe mr-2"></i>
+                            <a href="https://www.qualitas-ci.com" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="hover:text-white transition-colors">
+                                www.qualitas-ci.com
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fas fa-tv mr-2"></i>
+                            <a href="https://www.qualitas.tv" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="hover:text-white transition-colors">
+                                www.qualitas.tv
+                            </a>
+                        </p>
+                        <div class="pt-4">
+                            <h4 class="font-semibold mb-3">Suivez-nous</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-blue-800 text-center">
-                <p class="text-blue-200">
-                    <i class="far fa-copyright mr-2"></i>{{ "now"|date("Y") }} Africa QSHE Forum. Tous droits réservés.
-                </p>
+
+            {# Barre de séparation #}
+            <div class="border-t border-blue-800 pt-8">
+                {# Liens légaux et copyright #}
+                <div class="text-center">
+                    <div class="flex justify-center space-x-6 mb-4">
+                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
+                            Mentions légales
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
+                            Politique de confidentialité
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
+                            Conditions d'utilisation
+                        </a>
+                    </div>
+                    <p class="text-blue-200 text-sm">
+                        <i class="far fa-copyright mr-2"></i>{{ "now"|date("Y") }} Africa QSHE Forum. 
+                        Tous droits réservés. Un événement QUALITAS Côte d'Ivoire SA.
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
