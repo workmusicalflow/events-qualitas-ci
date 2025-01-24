@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/banner.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/01691af9f6.js" crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="/js/banner-animations.js" defer></script>
     <style>
         .map-container {
             position: relative;
@@ -79,30 +83,63 @@
         </div>
     </nav>
 
-    {# Bannière #}
-    <header class="theme-gradient text-white py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ title }} {{ event.date }}</h1>
-                <p class="text-xl mb-8 font-light">{{ event.description }}</p>
-                <div class="bg-white/10 p-6 rounded-lg mb-8">
-                    <h2 class="text-2xl font-semibold mb-4">{{ event.theme }}</h2>
-                    <div class="flex items-center justify-center space-x-8">
-                        <p class="text-lg">
-                            <i class="fas fa-calendar-alt mr-2"></i>
-                            <span class="font-bold">{{ event.date }}</span>
+    {# Bannière Interactive #}
+    <header class="relative">
+        <div class="banner-container">
+            <picture>
+                <source media="(min-width: 1024px)" srcset="/images/banner/desktop-banner.jpg">
+                <source media="(min-width: 768px)" srcset="/images/banner/tablette-banner.jpg">
+                <img src="/images/banner/mobile-banner.jpg" alt="Africa QSHE Forum" class="banner-image">
+            </picture>
+            <div class="banner-overlay"></div>
+            
+            <div class="container mx-auto px-4 h-full flex items-center">
+                <div class="max-w-4xl mx-auto text-white text-center relative z-10">
+                    {# Contenu principal #}
+                    <div class="banner-content">
+                        <h1 class="banner-title text-4xl md:text-5xl font-bold">
+                            {{ title }} {{ event.date }}
+                        </h1>
+                        <p class="banner-description text-xl font-light">
+                            {{ event.description }}
                         </p>
-                        <p class="text-lg">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span>{{ event.location }}</span>
-                        </p>
+                        <h2 class="banner-theme font-semibold text-yellow-400">
+                            {{ event.theme }}
+                        </h2>
                     </div>
-                </div>
-                <div>
-                    <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-                       class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg inline-block">
-                        <i class="fas fa-user-plus mr-2"></i>Devenir Exposant
-                    </a>
+
+                    {# Zone d'informations de l'événement #}
+                    <div class="event-info-box mt-12 p-8 rounded-lg">
+                        <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12">
+                            <div class="event-info-item">
+                                <div class="info-icon text-yellow-400">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm uppercase tracking-wide text-yellow-200">Date</span>
+                                    <span class="font-bold text-lg">{{ event.date }}</span>
+                                </div>
+                            </div>
+                            <div class="event-info-item">
+                                <div class="info-icon text-yellow-400">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="block text-sm uppercase tracking-wide text-yellow-200">Lieu</span>
+                                    <span class="font-bold text-lg">{{ event.location }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Bouton CTA #}
+                    <div class="mt-12 cta-button">
+                        <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
+                           class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-4 px-8 rounded-lg inline-flex items-center space-x-2">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Devenir Exposant</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
