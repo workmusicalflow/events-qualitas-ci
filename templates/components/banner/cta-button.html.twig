@@ -1,0 +1,112 @@
+{# Bouton Call-to-Action #}
+<div class="mt-12 cta-button">
+    <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
+       class="group relative inline-flex items-center justify-center"
+       target="_blank" 
+       rel="noopener noreferrer">
+        
+        {# Bouton principal #}
+        <div class="relative z-10 bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-4 px-8 rounded-lg 
+                    inline-flex items-center space-x-2 transform transition-all duration-300 
+                    hover:translate-y-[-2px] hover:shadow-lg">
+            <i class="fas fa-user-plus text-xl"></i>
+            <span class="ml-2">Devenir Exposant</span>
+        </div>
+
+        {# Effet de brillance au survol #}
+        <div class="absolute inset-0 rounded-lg overflow-hidden">
+            <div class="absolute inset-0 group-hover:animate-shine bg-gradient-to-r from-transparent via-white/10 to-transparent 
+                        skew-x-[-25deg] translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+        </div>
+    </a>
+</div>
+
+{# Styles spécifiques au composant #}
+{% block component_styles %}
+<style>
+    @keyframes shine {
+        from {
+            transform: translateX(-100%) skewX(-25deg);
+        }
+        to {
+            transform: translateX(100%) skewX(-25deg);
+        }
+    }
+
+    .animate-shine {
+        animation: shine 1s ease-in-out infinite;
+    }
+
+    .cta-button a::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 0.5rem;
+        padding: 2px;
+        background: linear-gradient(45deg, #fbbf24, #f59e0b);
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cta-button a:hover::before {
+        opacity: 1;
+    }
+
+    .cta-button a:active {
+        transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .cta-button a,
+        .cta-button a::before,
+        .animate-shine {
+            animation: none;
+            transition: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{# Script spécifique au composant #}
+{% block component_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ctaButton = document.querySelector('.cta-button a');
+        
+        // Effet de pulsation subtil
+        gsap.to(ctaButton, {
+            scale: 1.05,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut'
+        });
+
+        // Désactiver l'animation au survol
+        ctaButton.addEventListener('mouseenter', () => {
+            gsap.killTweensOf(ctaButton);
+            gsap.to(ctaButton, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        // Réactiver l'animation après le survol
+        ctaButton.addEventListener('mouseleave', () => {
+            gsap.to(ctaButton, {
+                scale: 1.05,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+        });
+    });
+</script>
+{% endblock %}

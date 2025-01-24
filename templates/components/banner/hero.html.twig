@@ -1,0 +1,45 @@
+{# Bannière principale #}
+<header class="relative">
+    <div class="banner-container">
+        {# Image de fond responsive #}
+        <picture>
+            <source media="(min-width: 1024px)" srcset="/images/banner/desktop-banner.jpg">
+            <source media="(min-width: 768px)" srcset="/images/banner/tablette-banner.jpg">
+            <img src="/images/banner/mobile-banner.jpg" 
+                 alt="Africa QSHE Forum" 
+                 class="banner-image"
+                 loading="eager"
+                 fetchpriority="high">
+        </picture>
+
+        {# Overlay avec gradient #}
+        <div class="banner-overlay"></div>
+        
+        {# Contenu de la bannière #}
+        <div class="container mx-auto px-4 h-full flex items-center">
+            <div class="max-w-4xl mx-auto text-white text-center relative z-10">
+                {# Contenu principal #}
+                <div class="banner-content">
+                    <h1 class="banner-title text-4xl md:text-5xl font-bold">
+                        {{ title }} {{ event.date }}
+                    </h1>
+                    <p class="banner-description text-xl font-light mt-6">
+                        {{ event.description }}
+                    </p>
+                    <h2 class="banner-theme font-semibold text-yellow-400 mt-6">
+                        {{ event.theme }}
+                    </h2>
+                </div>
+
+                {# Informations de l'événement #}
+                {% include 'components/banner/event-info.html.twig' with {
+                    'date': event.date,
+                    'location': event.location
+                } %}
+
+                {# Bouton CTA #}
+                {% include 'components/banner/cta-button.html.twig' %}
+            </div>
+        </div>
+    </div>
+</header>
