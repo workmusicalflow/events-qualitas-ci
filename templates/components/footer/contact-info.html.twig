@@ -1,0 +1,132 @@
+{# Informations de contact #}
+<div class="contact-info">
+    <h3 class="font-bold text-lg mb-6">
+        <i class="fas fa-address-card mr-2"></i>Contact
+    </h3>
+    <div class="text-blue-200 space-y-3">
+        {# Téléphone fixe #}
+        <div class="group">
+            <p>
+                <i class="fas fa-phone mr-2 group-hover:text-yellow-400 transition-colors"></i>
+                <span class="font-semibold">Fixe :</span> 
+                <a href="tel:+22527212416" 
+                   class="hover:text-white transition-colors inline-flex items-center">
+                    <span>+225 27 21 24 16 13</span>
+                    <i class="fas fa-phone-volume ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+            </p>
+        </div>
+
+        {# Téléphone mobile #}
+        <div class="group">
+            <p>
+                <i class="fas fa-mobile-alt mr-2 group-hover:text-yellow-400 transition-colors"></i>
+                <span class="font-semibold">Mobile :</span>
+                <a href="tel:+22507091300" 
+                   class="hover:text-white transition-colors inline-flex items-center">
+                    <span>+225 07 09 13 00 12</span>
+                    <i class="fas fa-phone-volume ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+            </p>
+        </div>
+
+        {# Email principal #}
+        <div class="group">
+            <p>
+                <i class="fas fa-envelope mr-2 group-hover:text-yellow-400 transition-colors"></i>
+                <a href="mailto:infosqualitas@gmail.com" 
+                   class="hover:text-white transition-colors inline-flex items-center">
+                    <span>infosqualitas@gmail.com</span>
+                    <i class="fas fa-paper-plane ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+            </p>
+        </div>
+
+        {# Email secondaire #}
+        <div class="group">
+            <p>
+                <i class="fas fa-envelope mr-2 group-hover:text-yellow-400 transition-colors"></i>
+                <a href="mailto:info@qualitas-ci.com" 
+                   class="hover:text-white transition-colors inline-flex items-center">
+                    <span>info@qualitas-ci.com</span>
+                    <i class="fas fa-paper-plane ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </a>
+            </p>
+        </div>
+
+        {# Horaires de contact #}
+        <div class="mt-6 pt-4 border-t border-blue-800">
+            <h4 class="font-semibold mb-2 flex items-center">
+                <i class="fas fa-clock mr-2 text-yellow-400"></i>
+                Horaires
+            </h4>
+            <p class="text-sm">
+                Lundi - Vendredi : 8h00 - 18h00<br>
+                Samedi : 9h00 - 13h00
+            </p>
+        </div>
+    </div>
+</div>
+
+{# Styles spécifiques au composant #}
+{% block component_styles %}
+<style>
+    .contact-info a {
+        position: relative;
+    }
+
+    .contact-info a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-info a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .contact-info a::after {
+            transition: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{# Scripts spécifiques au composant #}
+{% block component_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Animation des icônes au survol
+        const contactGroups = document.querySelectorAll('.contact-info .group');
+        
+        contactGroups.forEach(group => {
+            const icon = group.querySelector('i:first-child');
+            
+            group.addEventListener('mouseenter', () => {
+                gsap.to(icon, {
+                    scale: 1.2,
+                    duration: 0.3,
+                    ease: 'back.out(1.7)'
+                });
+            });
+
+            group.addEventListener('mouseleave', () => {
+                gsap.to(icon, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}
