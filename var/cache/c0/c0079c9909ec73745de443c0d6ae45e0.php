@@ -15,7 +15,6 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* components/sections/speakers.html.twig */
-
 class __TwigTemplate_ea259b17c27b85f49739eb6c2c84761d extends Template
 {
     private Source $source;
@@ -72,10 +71,10 @@ class __TwigTemplate_ea259b17c27b85f49739eb6c2c84761d extends Template
         $context['_parent'] = $context;
         $context['_seq'] = CoreExtension::ensureTraversable(($context["speakers"] ?? null));
         $context['loop'] = [
-            'parent' => $context['_parent'],
-            'index0' => 0,
-            'index'  => 1,
-            'first'  => true,
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
         ];
         if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
             $length = count($context['_seq']);
@@ -337,7 +336,7 @@ class __TwigTemplate_ea259b17c27b85f49739eb6c2c84761d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array(282 => 134,  275 => 133,  243 => 103,  236 => 102,  231 => 133,  228 => 131,  226 => 102,  213 => 90,  209 => 87,  194 => 85,  189 => 82,  178 => 75,  175 => 74,  164 => 67,  162 => 66,  158 => 64,  155 => 63,  151 => 60,  145 => 57,  142 => 56,  139 => 55,  133 => 51,  126 => 47,  119 => 43,  115 => 41,  110 => 37,  103 => 32,  99 => 31,  96 => 30,  91 => 27,  88 => 26,  71 => 25,  68 => 24,  61 => 18,  44 => 2,);
+        return array (  282 => 134,  275 => 133,  243 => 103,  236 => 102,  231 => 133,  228 => 131,  226 => 102,  213 => 90,  209 => 87,  194 => 85,  189 => 82,  178 => 75,  175 => 74,  164 => 67,  162 => 66,  158 => 64,  155 => 63,  151 => 60,  145 => 57,  142 => 56,  139 => 55,  133 => 51,  126 => 47,  119 => 43,  115 => 41,  110 => 37,  103 => 32,  99 => 31,  96 => 30,  91 => 27,  88 => 26,  71 => 25,  68 => 24,  61 => 18,  44 => 2,);
     }
 
     public function getSourceContext(): Source

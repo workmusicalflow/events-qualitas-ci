@@ -19,11 +19,7 @@ class HomeController
             'title' => 'Africa QSHE Forum',
             'description' => 'Bienvenue sur le site officiel du Africa QSHE Forum',
             'menu' => [
-                'logo' => [
-                    'svg' => '/images/logo/logo-qshe.svg',
-                    'png' => '/images/logo/logo-qshe.png',
-                    'alt' => 'Logo Africa QSHE Forum'
-                ],
+                'logo' => '/images/logo/logo-qshe.svg',
                 'items' => [
                     [
                         'label' => 'Programme',
@@ -63,80 +59,9 @@ class HomeController
                 ]
             ],
             'event' => [
-                'dates' => [
-                    'start' => '2025-05-08',
-                    'end' => '2025-05-10',
-                    'display' => 'Du 8 au 10 mai 2025',
-                    'schedule' => [
-                        [
-                            'date' => '2025-05-08',
-                            'day' => 'Jour 1',
-                            'title' => 'Ouverture et Networking',
-                            'events' => [
-                                'Accueil des participants',
-                                'Discours d\'ouverture',
-                                'Visite des stands d\'exposition',
-                                'Sessions d\'échanges'
-                            ]
-                        ],
-                        [
-                            'date' => '2025-05-09',
-                            'day' => 'Jour 2',
-                            'title' => 'Africa Business Awards',
-                            'events' => [
-                                'Africa Business Awards For Lands Restoration',
-                                'Panels thématiques',
-                                'Cérémonie de remise des prix'
-                            ]
-                        ],
-                        [
-                            'date' => '2025-05-10',
-                            'day' => 'Jour 3',
-                            'title' => 'Conférences et Clôture',
-                            'events' => [
-                                'Panels d\'experts',
-                                'Déjeuner networking',
-                                'Conférences spécialisées',
-                                'Cérémonie de clôture'
-                            ]
-                        ]
-                    ]
-                ],
-                'location' => [
-                    'name' => 'Abidjan, Côte d\'Ivoire',
-                    'venue' => 'Sofitel Abidjan Hôtel Ivoire',
-                    'address' => 'Boulevard Hassan II, Cocody',
-                    'coordinates' => [
-                        'lat' => 5.3364,
-                        'lng' => -4.0147
-                    ]
-                ],
-                'theme' => 'Accélérer la transition écologique pour une Afrique durable et résiliente: innovations, stratégies et collaborations',
-                'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
-                'presentation' => [
-                    'intro' => 'Rejoignez-nous pour la nouvelle édition de l\'Africa QSHE Forum, le rendez-vous incontournable des professionnels de la Qualité, Santé, Sécurité au Travail et Environnement en Afrique.',
-                    'details' => 'Cette plateforme d\'échange unique rassemble experts, décideurs et innovateurs autour du thème de la transition écologique.',
-                    'programme' => [
-                        'Conférences inspirantes',
-                        'Panels d\'experts',
-                        'Sessions de networking',
-                        'Partage des meilleures pratiques',
-                        'Remise des Africa Business Awards'
-                    ],
-                    'objectif' => 'Saisissez cette opportunité de contribuer à la transformation écologique de l\'Afrique tout en développant votre réseau professionnel.'
-                ],
-                'logos' => [
-                    'header' => [
-                        'svg' => '/images/logo/logo-qshe.svg',
-                        'png' => '/images/logo/logo-qshe.png',
-                        'alt' => 'Logo Africa QSHE Forum'
-                    ],
-                    'footer' => [
-                        'svg' => '/images/logo/logo-qshe-monochrome.svg',
-                        'png' => '/images/logo/logo-qshe-monochrome.png',
-                        'alt' => 'Logo Africa QSHE Forum - Version monochrome'
-                    ]
-                ]
+                'year' => '2025',
+                'location' => 'Abidjan, II Plateaux, Latrille Event',
+                'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement'
             ],
             'speakers' => $this->getRandomSpeakers()
         ];

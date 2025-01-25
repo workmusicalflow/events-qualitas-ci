@@ -108,7 +108,7 @@ class __TwigTemplate_9505bd1742cb047f9692410cec3cb4ac extends Template
         $macros = $this->macros;
         // line 24
         yield "    ";
-        yield from $this->loadTemplate("components/navigation/main-nav.html.twig", "pages/home.html.twig", 24)->unwrap()->yield($context);
+        yield from $this->loadTemplate("components/navigation.html.twig", "pages/home.html.twig", 24)->unwrap()->yield($context);
         yield from [];
     }
 

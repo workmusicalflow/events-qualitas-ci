@@ -15,7 +15,6 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* components/sections/partners.html.twig */
-
 class __TwigTemplate_0f29044a92b9b4c9f952373e710185f2 extends Template
 {
     private Source $source;
@@ -106,10 +105,10 @@ class __TwigTemplate_0f29044a92b9b4c9f952373e710185f2 extends Template
         $context['_seq'] = CoreExtension::ensureTraversable(((array_key_exists("partners", $context)) ? (Twig\Extension\CoreExtension::default(($context["partners"] ?? null), [])) : ([])));
         $context['_iterated'] = false;
         $context['loop'] = [
-            'parent' => $context['_parent'],
-            'index0' => 0,
-            'index'  => 1,
-            'first'  => true,
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
         ];
         if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
             $length = count($context['_seq']);
@@ -166,35 +165,15 @@ class __TwigTemplate_0f29044a92b9b4c9f952373e710185f2 extends Template
                                         Platinum
                                     </span>
                                 ";
-                } elseif ((CoreExtension::getAttribute(
-                    $this->env,
-                    $this->source,                 // line 78
-                    $context["partner"],
-                    "category",
-                    [],
-                    "any",
-                    false,
-                    false,
-                    false,
-                    78
-                ) == "gold")) {
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 78
+$context["partner"], "category", [], "any", false, false, false, 78) == "gold")) {
                     // line 79
                     yield "                                    <span class=\"bg-gradient-to-r from-yellow-400 to-yellow-300 text-yellow-900 text-xs font-semibold px-2.5 py-0.5 rounded-full\">
                                         Gold
                                     </span>
                                 ";
-                } elseif ((CoreExtension::getAttribute(
-                    $this->env,
-                    $this->source,                 // line 82
-                    $context["partner"],
-                    "category",
-                    [],
-                    "any",
-                    false,
-                    false,
-                    false,
-                    82
-                ) == "silver")) {
+                } elseif ((CoreExtension::getAttribute($this->env, $this->source,                 // line 82
+$context["partner"], "category", [], "any", false, false, false, 82) == "silver")) {
                     // line 83
                     yield "                                    <span class=\"bg-gradient-to-r from-gray-400 to-gray-300 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full\">
                                         Silver
@@ -387,7 +366,7 @@ class __TwigTemplate_0f29044a92b9b4c9f952373e710185f2 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array(309 => 151,  302 => 150,  270 => 120,  263 => 119,  258 => 150,  255 => 148,  253 => 119,  239 => 106,  235 => 103,  229 => 102,  218 => 97,  214 => 96,  210 => 94,  205 => 93,  203 => 92,  188 => 89,  184 => 87,  178 => 83,  176 => 82,  171 => 79,  169 => 78,  164 => 75,  162 => 74,  159 => 73,  156 => 72,  149 => 67,  144 => 66,  141 => 64,  136 => 62,  134 => 61,  129 => 59,  125 => 58,  122 => 57,  104 => 56,  101 => 55,  76 => 31,  69 => 25,  62 => 19,  44 => 2,);
+        return array (  309 => 151,  302 => 150,  270 => 120,  263 => 119,  258 => 150,  255 => 148,  253 => 119,  239 => 106,  235 => 103,  229 => 102,  218 => 97,  214 => 96,  210 => 94,  205 => 93,  203 => 92,  188 => 89,  184 => 87,  178 => 83,  176 => 82,  171 => 79,  169 => 78,  164 => 75,  162 => 74,  159 => 73,  156 => 72,  149 => 67,  144 => 66,  141 => 64,  136 => 62,  134 => 61,  129 => 59,  125 => 58,  122 => 57,  104 => 56,  101 => 55,  76 => 31,  69 => 25,  62 => 19,  44 => 2,);
     }
 
     public function getSourceContext(): Source

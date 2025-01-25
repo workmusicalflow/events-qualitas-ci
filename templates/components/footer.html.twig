@@ -1,0 +1,73 @@
+<footer class="bg-blue-900 text-white mt-20">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Logo and description -->
+            <div class="col-span-1">
+                <img src="{{ asset('images/logo/logo-qshe-monochrome.svg') }}" 
+                     alt="Logo Africa QSHE Forum" 
+                     class="h-12 w-auto mb-4">
+                <p class="text-sm text-gray-300">
+                    Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l'Environnement.
+                </p>
+            </div>
+
+            <!-- Quick links -->
+            <div class="col-span-1">
+                <h3 class="font-bold mb-4">Liens rapides</h3>
+                <ul class="space-y-2">
+                    {% for item in menu.items %}
+                        <li>
+                            <a href="{{ item.url }}" 
+                               class="text-gray-300 hover:text-white transition-colors duration-200">
+                                {{ item.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Contact information -->
+            <div class="col-span-1">
+                <h3 class="font-bold mb-4">Contact</h3>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Abidjan, II Plateaux, Latrille Event
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        +225 01 02 03 04 05
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope mr-2"></i>
+                        contact@africaqsheforum.com
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Social media -->
+            <div class="col-span-1">
+                <h3 class="font-bold mb-4">Suivez-nous</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-300">
+            &copy; {{ "now"|date("Y") }} Africa QSHE Forum. Tous droits réservés.
+        </div>
+    </div>
+</footer>

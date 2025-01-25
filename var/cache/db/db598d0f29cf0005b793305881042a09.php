@@ -15,7 +15,6 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* components/sections/location.html.twig */
-
 class __TwigTemplate_69598b2a9794b5c270a4c0d113799172 extends Template
 {
     private Source $source;
@@ -295,7 +294,7 @@ class __TwigTemplate_69598b2a9794b5c270a4c0d113799172 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array(243 => 163,  236 => 162,  206 => 134,  199 => 133,  194 => 162,  191 => 160,  189 => 133,  168 => 113,  142 => 88,  134 => 82,  114 => 65,  105 => 58,  101 => 55,  82 => 37,  69 => 25,  60 => 17,  44 => 2,);
+        return array (  243 => 163,  236 => 162,  206 => 134,  199 => 133,  194 => 162,  191 => 160,  189 => 133,  168 => 113,  142 => 88,  134 => 82,  114 => 65,  105 => 58,  101 => 55,  82 => 37,  69 => 25,  60 => 17,  44 => 2,);
     }
 
     public function getSourceContext(): Source

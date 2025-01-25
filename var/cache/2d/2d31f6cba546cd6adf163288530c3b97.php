@@ -82,7 +82,8 @@ class __TwigTemplate_922473507c46532b03d78a9d3222fabd extends Template
         yield from $this->unwrap()->yieldBlock('page_scripts', $context, $blocks);
         // line 24
         yield "</body>
-</html>";
+</html>
+";
         yield from [];
     }
 
@@ -95,7 +96,7 @@ class __TwigTemplate_922473507c46532b03d78a9d3222fabd extends Template
         $macros = $this->macros;
         // line 11
         yield "        ";
-        yield from $this->loadTemplate("components/navigation/main-nav.html.twig", "layouts/base.html.twig", 11)->unwrap()->yield($context);
+        yield from $this->loadTemplate("components/navigation.html.twig", "layouts/base.html.twig", 11)->unwrap()->yield($context);
         // line 12
         yield "    ";
         yield from [];
@@ -157,7 +158,7 @@ class __TwigTemplate_922473507c46532b03d78a9d3222fabd extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  130 => 23,  125 => 20,  122 => 19,  115 => 18,  105 => 15,  100 => 12,  97 => 11,  90 => 10,  84 => 24,  81 => 23,  78 => 21,  75 => 18,  72 => 16,  69 => 15,  66 => 13,  63 => 10,  59 => 7,  56 => 6,  53 => 5,  51 => 4,  46 => 1,);
+        return array (  131 => 23,  126 => 20,  123 => 19,  116 => 18,  106 => 15,  101 => 12,  98 => 11,  91 => 10,  84 => 24,  81 => 23,  78 => 21,  75 => 18,  72 => 16,  69 => 15,  66 => 13,  63 => 10,  59 => 7,  56 => 6,  53 => 5,  51 => 4,  46 => 1,);
     }
 
     public function getSourceContext(): Source

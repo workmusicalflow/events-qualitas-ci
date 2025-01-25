@@ -29,59 +29,10 @@
         .theme-gradient {
             background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         }
-        .nav-logo {
-            display: block;
-            height: 50px;
-            width: auto;
-        }
-        .nav-logo img {
-            height: 100%;
-            width: auto;
-            object-fit: contain;
-        }
-        @media (max-width: 768px) {
-            .nav-logo {
-                height: 40px;
-            }
-        }
     </style>
 </head>
 <body class="bg-gray-50">
-    {# Menu de Navigation #}
-    <nav class="bg-blue-900 text-white" x-data="{ isOpen: false }">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <a href="/" class="nav-logo">
-                    <picture>
-                        <source srcset="/images/logo/logo-qshe.svg" type="image/svg+xml">
-                        <img src="/images/logo/logo-qshe.png" 
-                             alt="Logo Africa QSHE Forum">
-                    </picture>
-                </a>
-                
-                {# Menu Mobile Burger #}
-                <button @click="isOpen = !isOpen" class="md:hidden">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-
-                {# Menu Items #}
-                <div class="hidden md:flex space-x-6">
-                    {% for item in menu.items %}
-                        <a href="{{ item.url }}" class="hover:text-blue-200">{{ item.label }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-
-            {# Menu Mobile #}
-            <div class="md:hidden" x-show="isOpen" @click.away="isOpen = false">
-                <div class="py-2 space-y-2">
-                    {% for item in menu.items %}
-                        <a href="{{ item.url }}" class="block hover:text-blue-200 py-2">{{ item.label }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </nav>
+    {% include 'components/navigation.html.twig' %}
 
     {# Bannière Interactive #}
     <header class="relative">
@@ -126,7 +77,9 @@
                                 </div>
                                 <div class="text-left">
                                     <span class="block text-sm uppercase tracking-wide text-yellow-200">Lieu</span>
-                                    <span class="font-bold text-lg">{{ event.location }}</span>
+                                    <span class="font-bold text-lg">{{ event.location.name }}</span>
+                                    <span class="block text-sm">{{ event.location.venue }}</span>
+                                    <span class="block text-sm">{{ event.location.address }}</span>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +209,13 @@
                     </div>
                     <div class="p-6 text-center">
                         <p class="text-xl font-bold text-blue-900">
-                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location }}
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.name }}
+                        </p>
+                        <p class="text-gray-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.venue }}
+                        </p>
+                        <p class="text-gray-600">
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.address }}
                         </p>
                         <p class="text-gray-600">
                             <i class="fas fa-calendar-alt mr-2"></i>{{ event.date }}
@@ -400,12 +359,4 @@
                         </a>
                     </div>
                     <p class="text-blue-200 text-sm">
-                        <i class="far fa-copyright mr-2"></i>{{ "now"|date("Y") }} Africa QSHE Forum. 
-                        Tous droits réservés. Un événement QUALITAS Côte d'Ivoire SA.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+                        <i class="far fa-copyright mr-2"></i>{{ "now"|date
