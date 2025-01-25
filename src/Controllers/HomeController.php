@@ -19,7 +19,7 @@ class HomeController
             'title' => 'Africa QSHE Forum',
             'description' => 'Bienvenue sur le site officiel du Africa QSHE Forum',
             'menu' => [
-                'logo' => 'https://via.placeholder.com/150x50?text=Africa+QSHE',
+                'logo' => '/images/logo/logo-qshe.svg',
                 'items' => [
                     ['label' => 'Programme', 'url' => '/programme'],
                     ['label' => 'Intervenants', 'url' => '/intervenants'],
@@ -30,8 +30,9 @@ class HomeController
                 ]
             ],
             'event' => [
-                'date' => '2025',
-                'location' => 'Abidjan, Côte d\'Ivoire',
+                'year' => '2025',
+                'date' => 'Du 08 au 10 MAI',
+                'location' => 'Abidjan, II Plateaux, Latrille Event',
                 'theme' => 'Accélérer la transition écologique pour une Afrique durable et résiliente: innovations, stratégies et collaborations',
                 'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
                 'presentation' => [
