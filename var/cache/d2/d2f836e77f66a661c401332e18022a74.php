@@ -40,7 +40,7 @@ class __TwigTemplate_ce99881c0603bafa22f2452ba3ad6a56 extends Template
         $macros = $this->macros;
         // line 1
         yield "<nav class=\"fixed top-0 left-0 w-full bg-blue-900 shadow-lg z-50\">
-    <div class=\"container mx-auto px-4\">
+    <div class=\"container mx-auto px-4\" x-data=\"{ isOpen: false }\">
         <div class=\"flex items-center justify-between h-16\">
             <!-- Logo -->
             <a href=\"/\" class=\"flex items-center\">
@@ -75,16 +75,16 @@ class __TwigTemplate_ce99881c0603bafa22f2452ba3ad6a56 extends Template
         yield "            </div>
 
             <!-- Menu Mobile -->
-            <div class=\"md:hidden\">
-                <button @click=\"isOpen = !isOpen\" 
-                        class=\"text-white hover:text-blue-200 focus:outline-none\">
-                    <i class=\"fas fa-bars text-2xl\"></i>
-                </button>
-            </div>
+<div class=\"md:hidden\">
+    <button @click=\"isOpen = !isOpen\" 
+            class=\"text-white hover:text-blue-200 focus:outline-none\">
+        <i class=\"fas fa-bars text-2xl\"></i>
+    </button>
+</div>
         </div>
 
         <!-- Menu Mobile Dropdown -->
-        <div class=\"md:hidden\" x-show=\"isOpen\" @click.away=\"isOpen = false\">
+        <div class=\"md:hidden bg-white shadow-lg\" x-show=\"isOpen\" @click.away=\"isOpen = false\" x-cloak>
             <div class=\"px-2 pt-2 pb-3 space-y-1\">
                 ";
         // line 33
@@ -95,7 +95,7 @@ class __TwigTemplate_ce99881c0603bafa22f2452ba3ad6a56 extends Template
             yield "                    <a href=\"";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "url", [], "any", false, false, false, 34), "html", null, true);
             yield "\" 
-                       class=\"block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-800\">
+                       class=\"block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-blue-100\">
                         ";
             // line 36
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "label", [], "any", false, false, false, 36), "html", null, true);
