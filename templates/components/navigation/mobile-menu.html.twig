@@ -1,60 +1,148 @@
 {# Menu Mobile #}
-<div class="md:hidden" 
-     x-show="isOpen" 
+<div id="mobile-menu"
+     class="md:hidden"
+     x-show="isOpen"
      x-transition:enter="transition ease-out duration-200"
      x-transition:enter-start="opacity-0 transform scale-95"
      x-transition:enter-end="opacity-100 transform scale-100"
      x-transition:leave="transition ease-in duration-150"
      x-transition:leave-start="opacity-100 transform scale-100"
      x-transition:leave-end="opacity-0 transform scale-95"
-     @click.away="isOpen = false">
+     @click.away="isOpen = false"
+     role="menu"
+     aria-orientation="vertical"
+     aria-labelledby="mobile-menu-button">
     
-    <div class="py-2 space-y-1">
+    <div class="py-2 space-y-1 bg-blue-800 rounded-md mt-2 shadow-xl">
+        {# Liens de navigation #}
         {% for item in items %}
-            <a href="{{ item.url }}" 
-               class="block px-4 py-3 text-base hover:bg-blue-800 hover:text-blue-200 transition-colors duration-200 rounded-lg"
-               {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
-                <div class="flex items-center">
-                    {% if item.icon %}
-                        <i class="fas fa-{{ item.icon }} w-6"></i>
-                    {% endif %}
-                    <span>{{ item.label }}</span>
-                    {% if item.external %}
-                        <i class="fas fa-external-link-alt ml-2 text-sm opacity-75"></i>
-                    {% endif %}
-                </div>
-            </a>
+            <div class="px-3 py-2">
+                <a href="{{ item.url }}" 
+                   class="block w-full text-left px-4 py-3 rounded-md transition-colors duration-200 relative {% if item.highlight %}bg-yellow-500 text-blue-900 font-bold hover:bg-yellow-400{% else %}text-white hover:bg-blue-700{% endif %}"
+                   {% if item.external %}
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="{{ item.label }} (s'ouvre dans un nouvel onglet)"
+                   {% endif %}
+                   role="menuitem">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-{{ item.icon }} w-6 {% if item.highlight %}text-blue-900{% endif %}"></i>
+                            <span>{{ item.label }}</span>
+                        </div>
+                        {% if item.external %}
+                            <i class="fas fa-external-link-alt text-sm opacity-75"></i>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
         {% endfor %}
-    </div>
 
-    {# Boutons d'action rapide #}
-    <div class="mt-4 px-4 py-3 border-t border-blue-800">
-        <div class="flex flex-col space-y-3">
+        {# Séparateur #}
+        <div class="border-t border-blue-700 my-4"></div>
+
+        {# Boutons d'action rapide #}
+        <div class="px-3 space-y-3">
             <a href="https://events-qualitas-ci.com/formulaire.html" 
-               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-blue-900 rounded-lg transition-colors duration-200">
+               class="block w-full text-center px-4 py-3 bg-yellow-500 hover:bg-yellow-400 text-blue-900 rounded-md font-bold transition-colors duration-200"
+               target="_blank"
+               rel="noopener noreferrer">
                 <i class="fas fa-id-badge mr-2"></i>
                 Badge de participation
             </a>
             <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-               class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded-lg transition-colors duration-200">
+               class="block w-full text-center px-4 py-3 bg-blue-700 hover:bg-blue-600 text-white rounded-md font-bold transition-colors duration-200"
+               target="_blank"
+               rel="noopener noreferrer">
                 <i class="fas fa-handshake mr-2"></i>
                 Devenir Exposant
             </a>
         </div>
-    </div>
 
-    {# Réseaux sociaux #}
-    <div class="mt-4 px-4 py-3 border-t border-blue-800">
-        <div class="flex justify-center space-x-6">
-            <a href="#" class="text-blue-200 hover:text-white text-xl transition-colors duration-200">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="#" class="text-blue-200 hover:text-white text-xl transition-colors duration-200">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#" class="text-blue-200 hover:text-white text-xl transition-colors duration-200">
-                <i class="fab fa-youtube"></i>
-            </a>
+        {# Informations de l'événement #}
+        <div class="px-6 py-4 mt-4 bg-blue-900/50 rounded-b-lg">
+            <div class="flex flex-col space-y-2 text-sm text-blue-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-calendar-alt text-yellow-400"></i>
+                    <span>Du 8 au 10 mai 2025</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-map-marker-alt text-yellow-400"></i>
+                    <span>Sofitel Abidjan Hôtel Ivoire</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+{# Styles spécifiques au composant #}
+{% block component_styles %}
+<style>
+    #mobile-menu {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+
+    #mobile-menu::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #mobile-menu::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+    }
+
+    #mobile-menu::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #mobile-menu,
+        #mobile-menu * {
+            transition: none !important;
+        }
+    }
+
+    /* Support pour la navigation au clavier sur mobile */
+    @media (max-width: 768px) {
+        a:focus-visible {
+            outline: 2px solid #FCD34D;
+            outline-offset: -2px;
+        }
+    }
+</style>
+{% endblock %}
+
+{# Scripts spécifiques au composant #}
+{% block component_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Gestion de la fermeture avec la touche Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.querySelector('#mobile-menu').style.display !== 'none') {
+                Alpine.store('isOpen', false);
+            }
+        });
+
+        // Gestion du focus lors de l'ouverture/fermeture
+        const menu = document.querySelector('#mobile-menu');
+        const firstFocusable = menu.querySelector('a');
+        const lastFocusable = menu.querySelectorAll('a')[menu.querySelectorAll('a').length - 1];
+
+        firstFocusable.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && e.shiftKey) {
+                e.preventDefault();
+                lastFocusable.focus();
+            }
+        });
+
+        lastFocusable.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && !e.shiftKey) {
+                e.preventDefault();
+                firstFocusable.focus();
+            }
+        });
+    });
+</script>
+{% endblock %}

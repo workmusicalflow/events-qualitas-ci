@@ -23,7 +23,7 @@
         {# Grille des intervenants #}
         <div class="speakers-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for speaker in speakers %}
-                <div class="speaker-card group relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl"
+                <div class="speaker-card group relative bg-white rounded-md shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl"
                      x-on:mouseenter="hoveredSpeaker = {{ loop.index }}"
                      x-on:mouseleave="hoveredSpeaker = null">
                     {# Image de l'intervenant #}
@@ -89,7 +89,7 @@
         {# Bouton "Découvrir la liste complète" #}
         <div class="text-center mt-12">
             <a href="/intervenants" 
-               class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
+               class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
                 <i class="fas fa-users mr-2"></i>
                 <span>Découvrir la liste complète</span>
                 <i class="fas fa-arrow-right ml-2"></i>

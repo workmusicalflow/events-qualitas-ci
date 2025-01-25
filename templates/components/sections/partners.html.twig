@@ -57,7 +57,7 @@
                 <div class="partner-logo group relative"
                      x-show="activeCategory === 'all' || activeCategory === '{{ partner.category|default('all') }}'">
                     <a href="{{ partner.url|default('#') }}" 
-                       class="block relative overflow-hidden rounded-lg bg-white p-6 shadow-md hover:shadow-xl transition-shadow duration-300"
+                       class="block relative overflow-hidden rounded-md bg-white p-6 shadow-md hover:shadow-xl transition-shadow duration-300"
                        {% if partner.url is defined %}
                            target="_blank" 
                            rel="noopener noreferrer"
@@ -92,7 +92,7 @@
                 {# Logos placeholder si aucun partenaire n'est défini #}
                 {% for i in 1..8 %}
                     <div class="partner-logo">
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="bg-white p-6 rounded-md shadow-md hover:shadow-xl transition-shadow duration-300">
                             <img src="https://via.placeholder.com/200x100?text=Partenaire+{{ i }}" 
                                  alt="Partenaire {{ i }}" 
                                  class="max-w-[150px] hover:opacity-80 transition-opacity duration-300">
@@ -105,7 +105,7 @@
         {# Bouton d'action #}
         <div class="text-center">
             <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-               class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
+               class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
                target="_blank"
                rel="noopener noreferrer">
                 <i class="fas fa-handshake mr-2"></i>

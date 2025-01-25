@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"Qualitas\\AfricaQsheForum\\Tests\\DatabaseTest::testDatabaseConnection":0.011}}
+{"version":1,"defects":[],"times":{"Qualitas\\AfricaQsheForum\\Tests\\DatabaseTest::testDatabaseConnection":0.011,"Qualitas\\AfricaQsheForum\\Tests\\Controllers\\HomeControllerTest::testIndexRendersHomeTemplateWithCorrectData":0.012}}
