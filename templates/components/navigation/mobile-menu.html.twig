@@ -1,59 +1,71 @@
-{# Menu Mobile - Version simplifiée #}
+{# Menu Mobile - Version optimisée #}
 <div id="mobile-menu" 
      class="md:hidden bg-blue-800 mt-2 rounded-lg shadow-lg"
      x-show="isOpen"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0 transform -translate-y-2"
+     x-transition:enter-end="opacity-100 transform translate-y-0"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100 transform translate-y-0"
+     x-transition:leave-end="opacity-0 transform -translate-y-2"
      @click.away="isOpen = false">
     
     <div class="p-4 space-y-2">
-        {# Liens de navigation #}
-        {% for item in items %}
-            <a href="{{ item.url }}" 
-               class="block w-full px-4 py-3 rounded-lg {% if item.highlight %}bg-yellow-500 text-blue-900 hover:bg-yellow-400 font-bold{% else %}text-white hover:bg-blue-700{% endif %}"
-               {% if item.external %}
-                   target="_blank" 
-                   rel="noopener noreferrer"
-               {% endif %}>
-                <div class="flex items-center">
+        {# Liste de navigation #}
+        <nav class="space-y-1" aria-label="Menu mobile">
+            {% for item in items %}
+                <a href="{{ item.url }}" 
+                   class="flex items-center w-full px-4 py-3 rounded-lg {% if item.highlight %}bg-yellow-500 text-blue-900 hover:bg-yellow-400 font-bold{% else %}text-white hover:bg-blue-700{% endif %}"
+                   {% if item.external %}
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="{{ item.label }} (s'ouvre dans un nouvel onglet)"
+                   {% endif %}>
                     <i class="fas fa-{{ item.icon }} w-6 {% if item.highlight %}text-blue-900{% else %}text-yellow-400{% endif %}"></i>
                     <span>{{ item.label }}</span>
                     {% if item.external %}
                         <i class="fas fa-external-link-alt ml-2 text-sm opacity-75"></i>
                     {% endif %}
-                </div>
-            </a>
-        {% endfor %}
+                </a>
+            {% endfor %}
+        </nav>
 
         {# Séparateur #}
-        <div class="border-t border-blue-700 my-4"></div>
+        <hr class="border-blue-700 my-4">
 
-        {# Boutons d'action rapide #}
+        {# Actions principales #}
         <div class="space-y-2">
             <a href="https://events-qualitas-ci.com/formulaire.html" 
-               class="block w-full text-center px-4 py-3 bg-yellow-500 hover:bg-yellow-400 text-blue-900 rounded-lg font-bold"
+               class="flex items-center justify-center w-full px-4 py-3 bg-yellow-500 hover:bg-yellow-400 text-blue-900 rounded-lg font-bold"
                target="_blank"
                rel="noopener noreferrer">
                 <i class="fas fa-id-badge mr-2"></i>
-                Badge de participation
+                <span>Badge de participation</span>
             </a>
             <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-               class="block w-full text-center px-4 py-3 bg-blue-700 hover:bg-blue-600 text-white rounded-lg font-bold"
+               class="flex items-center justify-center w-full px-4 py-3 bg-blue-700 hover:bg-blue-600 text-white rounded-lg font-bold"
                target="_blank"
                rel="noopener noreferrer">
                 <i class="fas fa-handshake mr-2"></i>
-                Devenir Exposant
+                <span>Devenir Exposant</span>
             </a>
         </div>
 
-        {# Informations de l'événement #}
+        {# Informations événement #}
         <div class="mt-4 p-4 bg-blue-900/50 rounded-lg">
+            <h3 class="text-sm font-semibold text-white mb-2">Informations pratiques</h3>
             <div class="text-sm text-blue-200 space-y-2">
                 <div class="flex items-center">
                     <i class="fas fa-calendar-alt text-yellow-400 w-6"></i>
-                    <span>Du 8 au 10 mai 2025</span>
+                    <time datetime="2025-05-08/2025-05-10">Du 8 au 10 mai 2025</time>
                 </div>
                 <div class="flex items-center">
                     <i class="fas fa-map-marker-alt text-yellow-400 w-6"></i>
-                    <span>Sofitel Abidjan Hôtel Ivoire</span>
+                    <address class="not-italic">Sofitel Abidjan Hôtel Ivoire</address>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-yellow-400 w-6"></i>
+                    <span>8h30 - 17h30</span>
                 </div>
             </div>
         </div>
@@ -61,14 +73,40 @@
 </div>
 
 <style>
-    /* Transitions simples pour les interactions */
-    #mobile-menu a {
-        transition: background-color 0.2s;
+    /* Styles de base */
+    #mobile-menu {
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
     }
 
+    /* Personnalisation de la scrollbar */
+    #mobile-menu::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #mobile-menu::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    #mobile-menu::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+    }
+
+    /* Support de la réduction des animations */
     @media (prefers-reduced-motion: reduce) {
-        #mobile-menu a {
-            transition: none;
+        #mobile-menu {
+            transition: none !important;
         }
+        
+        #mobile-menu [x-transition] {
+            transition: none !important;
+        }
+    }
+
+    /* Amélioration de l'accessibilité au focus */
+    #mobile-menu a:focus-visible {
+        outline: 2px solid #FCD34D;
+        outline-offset: -2px;
     }
 </style>
