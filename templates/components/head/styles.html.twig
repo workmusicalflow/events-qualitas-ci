@@ -1,81 +1,22 @@
-{# Styles externes #}
+{# Styles de base #}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 {# Styles personnalisés #}
-<link href="/css/banner.css" rel="stylesheet">
-
-{# Styles communs intégrés #}
 <style>
-    {# Styles de base #}
-    .map-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
+    .bg-brand-blue {
+        background-color: #3B4BA5;
     }
-    .map-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
+    .bg-brand-blue-dark {
+        background-color: #2C3B8C;
     }
-
-    {# Thème et gradients #}
-    .theme-gradient {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    .text-brand-gold {
+        color: #FFB800;
     }
-
-    {# Styles du logo #}
-    .nav-logo {
-        display: block;
-        height: 50px;
-        width: auto;
+    .bg-brand-gold {
+        background-color: #FFB800;
     }
-    .nav-logo img {
-        height: 100%;
-        width: auto;
-        object-fit: contain;
-    }
-
-    {# Animations #}
-    .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 300ms;
-    }
-
-    {# Utilitaires d'accessibilité #}
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
-    }
-
-    {# Media Queries #}
-    @media (max-width: 768px) {
-        .nav-logo {
-            height: 40px;
-        }
-    }
-
-    {# Print styles #}
-    @media print {
-        .no-print {
-            display: none !important;
-        }
-        .print-break-inside {
-            break-inside: avoid;
-        }
+    .hover\:bg-brand-gold-dark:hover {
+        background-color: #FFA500;
     }
 </style>
-
-{# Styles spécifiques à la page #}
-{% block page_styles %}{% endblock %}
