@@ -1,22 +1,113 @@
-{# Styles de base #}
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{# Polices et icônes #}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-{# Styles personnalisés #}
 <style>
-    .bg-brand-blue {
-        background-color: #3B4BA5;
+    /* Variables de couleurs */
+    :root {
+        --brand-blue: #1e3a8a;
+        --brand-blue-dark: #172b6c;
+        --brand-green: #059669;
+        --brand-gold: #fbbf24;
     }
-    .bg-brand-blue-dark {
-        background-color: #2C3B8C;
+
+    /* Styles de la bannière */
+    .banner-section {
+        background: linear-gradient(135deg, #1e3a8a 0%, #172b6c 100%);
+        position: relative;
+        overflow: hidden;
+        color: white;
     }
-    .text-brand-gold {
-        color: #FFB800;
+
+    /* Force les couleurs de texte dans la bannière */
+    .banner-section * {
+        color: white;
     }
-    .bg-brand-gold {
-        background-color: #FFB800;
+
+    .banner-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at center,
+            rgba(5, 150, 105, 0.1),
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 1;
     }
-    .hover\:bg-brand-gold-dark:hover {
-        background-color: #FFA500;
+
+    /* Container pour s'assurer que le contenu est au-dessus de l'overlay */
+    .banner-section .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Typographie */
+    .banner-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        color: white !important;
+    }
+
+    .banner-subtitle {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* Thème */
+    .theme-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+    }
+
+    .theme-heading {
+        color: var(--brand-gold) !important;
+    }
+
+    /* Carte événement */
+    .event-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .event-card:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Labels et valeurs dans la carte */
+    .event-label {
+        color: var(--brand-gold) !important;
+    }
+
+    .event-value {
+        color: white !important;
+    }
+
+    /* Icônes */
+    .icon-container {
+        background: var(--brand-green);
+        color: white !important;
+    }
+
+    /* CTA Button */
+    .cta-button {
+        background: var(--brand-green);
+        color: white !important;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background: #047857;
+        transform: translateY(-2px);
+    }
+
+    /* Accessibilité */
+    @media (prefers-reduced-motion: reduce) {
+        .event-card,
+        .cta-button {
+            transition: none;
+            transform: none;
+        }
     }
 </style>

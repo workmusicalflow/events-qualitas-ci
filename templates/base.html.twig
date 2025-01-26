@@ -5,17 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ title }}{% endblock %}</title>
     
+    {# Tailwind avec configuration personnalisée #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#1e3a8a',
+                        'brand-blue-dark': '#172b6c',
+                        'brand-green': '#059669',
+                        'brand-green-dark': '#047857',
+                        'brand-gold': '#fbbf24'
+                    },
+                    fontFamily: {
+                        'barlow': ['"Barlow Condensed"', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            },
+            plugins: [],
+        }
+    </script>
+    
+    {# Styles de base avant les styles personnalisés #}
     {% block stylesheets %}
-        {# Inclusion des styles de base #}
         {% include 'components/head/styles.html.twig' %}
     {% endblock %}
 
+    {# Scripts #}
     {% block javascripts %}
-        {# Inclusion des scripts de base #}
         {% include 'components/head/scripts.html.twig' %}
     {% endblock %}
 </head>
-<body>
+<body class="font-inter">
     {% block navigation %}
         {% include 'components/navigation.html.twig' %}
     {% endblock %}
