@@ -44,6 +44,20 @@
                         <i class="fas fa-bullseye mr-2"></i>
                         Notre objectif
                     </h3>
+                    
+                    {# Image d'illustration #}
+                    <div class="mb-6 rounded-lg overflow-hidden">
+                        <picture>
+                            <source srcset="/images/sections/presentation/objectif.webp" type="image/webp">
+                            <img src="/images/sections/presentation/objectif.jpg" 
+                                 alt="Illustration des objectifs du forum QSHE"
+                                 class="w-full h-48 object-cover rounded-lg transform hover:scale-105 transition-transform duration-300"
+                                 loading="lazy"
+                                 width="600"
+                                 height="400">
+                        </picture>
+                    </div>
+                    
                     <div class="prose prose-lg">
                         <p class="text-gray-700 leading-relaxed">
                             {{ event.presentation.objectif }}
@@ -69,7 +83,8 @@
 <style>
     @media (prefers-reduced-motion: reduce) {
         .group-hover\:bg-blue-700,
-        .group-hover\:text-gray-900 {
+        .group-hover\:text-gray-900,
+        .hover\:scale-105 {
             transition: none;
         }
     }
