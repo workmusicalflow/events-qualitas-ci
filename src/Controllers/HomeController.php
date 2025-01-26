@@ -60,10 +60,24 @@ class HomeController
             ],
             'event' => [
                 'year' => '2025',
-                'location' => 'Abidjan, II Plateaux, Latrille Event',
+                'dates' => '15-17 Mai 2025',
+                'location' => [
+                    'venue' => 'Latrille Event',
+                    'area' => 'II Plateaux',
+                    'city' => 'Abidjan'
+                ],
                 'presentation' => [
                     'intro' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
                     'description' => 'Un événement majeur dédié au réseautage, à la promotion d\'outils de management innovants et au développement des investissements en Afrique.',
+                    'theme' => [
+                        'main' => 'Innovation et Excellence QSHE en Afrique',
+                        'pillars' => [
+                            'Qualité',
+                            'Sécurité',
+                            'Santé',
+                            'Environnement'
+                        ]
+                    ],
                     'programme' => [
                         'Cérémonie d\'ouverture spectaculaire avec performances artistiques et culturelles',
                         'Exposition interactive avec stands des leaders de l\'industrie QSHE',
@@ -73,7 +87,13 @@ class HomeController
                         'Cérémonie de remise des Prix QSHE Excellence Awards',
                         'Qualitas Day : journée spéciale dédiée aux certifications et formations'
                     ],
-                    'objectif' => 'Valoriser l\'excellence en management QSHE tout en encourageant les opérateurs économiques à améliorer leurs politiques pour une croissance durable et compétitive en Afrique.'
+                    'objectif' => 'Valoriser l\'excellence en management QSHE tout en encourageant les opérateurs économiques à améliorer leurs politiques pour une croissance durable et compétitive en Afrique.',
+                    'highlights' => [
+                        'Plus de 500 participants attendus',
+                        '30+ experts internationaux',
+                        '20 pays représentés',
+                        '50 exposants leaders du secteur'
+                    ]
                 ]
             ],
             'speakers' => $this->getRandomSpeakers()

@@ -1,12 +1,12 @@
 {# Section de présentation de l'événement #}
-<section class="py-20 bg-white">
+<section class="py-20 bg-white" aria-labelledby="presentation-title">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             {# Introduction #}
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-blue-900 mb-8">
-                    <i class="fas fa-calendar-star mr-2"></i>
-                    Programme du Forum
+                <h2 id="presentation-title" class="text-3xl font-bold text-brand-blue mb-8">
+                    <i class="fas fa-calendar-star mr-2" aria-hidden="true"></i>
+                    {{ event.presentation.theme.main }}
                 </h2>
                 <p class="text-2xl text-gray-700 leading-relaxed mb-8">
                     {{ event.presentation.intro }}
@@ -14,20 +14,30 @@
                 <p class="text-xl text-gray-600 mb-12">
                     {{ event.presentation.description }}
                 </p>
+
+                {# Points forts #}
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                    {% for highlight in event.presentation.highlights %}
+                        <div class="bg-brand-blue/5 rounded-xl p-4 transform hover:-translate-y-1 transition-transform duration-300">
+                            <p class="font-bold text-brand-blue">{{ highlight }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
 
             {# Programme et Objectif #}
             <div class="grid md:grid-cols-2 gap-8 mb-16">
                 {# Programme #}
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-blue-900 mb-6 flex items-center">
-                        <i class="fas fa-calendar-check mr-2"></i>
+                <div class="bg-gradient-to-br from-brand-blue/5 to-brand-blue/10 p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-brand-blue mb-6 flex items-center">
+                        <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
                         Au programme
                     </h3>
-                    <ul class="space-y-4">
+                    <ul class="space-y-4" role="list">
                         {% for item in event.presentation.programme %}
                             <li class="flex items-start group">
-                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-900 text-white rounded-full mr-3 group-hover:bg-blue-700 transition-colors">
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-brand-blue text-white rounded-full mr-3 transition-colors group-hover:bg-brand-blue-dark" 
+                                      aria-hidden="true">
                                     {{ loop.index }}
                                 </span>
                                 <span class="text-gray-700 group-hover:text-gray-900 transition-colors">
@@ -39,19 +49,19 @@
                 </div>
 
                 {# Objectif #}
-                <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-green-900 mb-6 flex items-center">
-                        <i class="fas fa-bullseye mr-2"></i>
+                <div class="bg-gradient-to-br from-brand-green/5 to-brand-green/10 p-8 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-brand-green mb-6 flex items-center">
+                        <i class="fas fa-bullseye mr-2" aria-hidden="true"></i>
                         Notre objectif
                     </h3>
                     
                     {# Image d'illustration #}
-                    <div class="mb-6 rounded-lg overflow-hidden">
+                    <div class="mb-6 rounded-xl overflow-hidden">
                         <picture>
                             <source srcset="/images/sections/presentation/objectif.webp" type="image/webp">
                             <img src="/images/sections/presentation/objectif.jpg" 
                                  alt="Illustration des objectifs du forum QSHE"
-                                 class="w-full h-48 object-cover rounded-lg transform hover:scale-105 transition-transform duration-300"
+                                 class="w-full h-48 object-cover rounded-xl transform hover:scale-[1.02] transition-transform duration-300"
                                  loading="lazy"
                                  width="600"
                                  height="400">
@@ -63,30 +73,30 @@
                             {{ event.presentation.objectif }}
                         </p>
                     </div>
+
+                    {# Piliers thématiques #}
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold text-brand-green mb-4">Nos piliers thématiques</h4>
+                        <div class="flex flex-wrap gap-3">
+                            {% for pillar in event.presentation.theme.pillars %}
+                                <span class="bg-brand-green/10 text-brand-green px-4 py-2 rounded-full text-sm font-medium">
+                                    {{ pillar }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {# Bouton d'action #}
             <div class="text-center">
                 <a href="https://events-qualitas-ci.com/formulaire.html" 
-                   class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300">
-                    <i class="fas fa-id-badge mr-2"></i>
+                   class="inline-flex items-center bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
+                   aria-label="Générer mon badge de visite pour le forum">
+                    <i class="fas fa-id-badge mr-2" aria-hidden="true"></i>
                     <span>Générer mon badge de visite</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
-
-{# Styles spécifiques au composant #}
-{% block component_styles %}
-<style>
-    @media (prefers-reduced-motion: reduce) {
-        .group-hover\:bg-blue-700,
-        .group-hover\:text-gray-900,
-        .hover\:scale-105 {
-            transition: none;
-        }
-    }
-</style>
-{% endblock %}
