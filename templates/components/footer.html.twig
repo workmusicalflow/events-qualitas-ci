@@ -1,73 +1,83 @@
-<footer class="bg-blue-900 text-white mt-20">
-    <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Logo and description -->
-            <div class="col-span-1">
-                <img src="{{ asset('images/logo/logo-qshe-monochrome.svg') }}" 
+<footer class="bg-blue-900 border-t border-blue-800 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Logo et description -->
+            <div class="flex flex-col space-y-4">
+                <img src="/images/logo/logo-qshe-monochrome.svg" 
                      alt="Logo Africa QSHE Forum" 
-                     class="h-12 w-auto mb-4">
-                <p class="text-sm text-gray-300">
+                     class="h-12 w-auto">
+                <p class="text-sm text-gray-100">
                     Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l'Environnement.
                 </p>
             </div>
 
-            <!-- Quick links -->
-            <div class="col-span-1">
-                <h3 class="font-bold mb-4">Liens rapides</h3>
-                <ul class="space-y-2">
-                    {% for item in menu.items %}
-                        <li>
-                            <a href="{{ item.url }}" 
-                               class="text-gray-300 hover:text-white transition-colors duration-200">
-                                {{ item.label }}
+            <!-- Contacts vérifiés -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-white">Contact</h3>
+                <ul class="space-y-3 text-gray-100">
+                    <li class="flex items-start">
+                        <i class="fas fa-phone mt-1 mr-3 text-gray-400 w-4"></i>
+                        <div>
+                            <p class="font-medium">Téléphone :</p>
+                            <a href="tel:+22527212416" class="hover:text-blue-300 transition-colors">
+                                +225 27 21 24 16 13
                             </a>
-                        </li>
-                    {% endfor %}
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-mobile-alt mt-1 mr-3 text-gray-400 w-4"></i>
+                        <div>
+                            <p class="font-medium">Mobile :</p>
+                            <a href="tel:+22507091300" class="hover:text-blue-300 transition-colors">
+                                +225 07 09 13 00 12
+                            </a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-envelope mt-1 mr-3 text-gray-400 w-4"></i>
+                        <div>
+                            <p class="font-medium">Email :</p>
+                            <a href="mailto:infosqualitas@gmail.com" class="hover:text-blue-300 transition-colors">
+                                infosqualitas@gmail.com
+                            </a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400 w-4"></i>
+                        <div>
+                            <p class="font-medium">Adresse :</p>
+                            <p>II Plateaux, Abidjan - Côte d'Ivoire</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
-            <!-- Contact information -->
-            <div class="col-span-1">
-                <h3 class="font-bold mb-4">Contact</h3>
-                <ul class="space-y-2 text-sm text-gray-300">
+            <!-- Liens légaux -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-white">Légal</h3>
+                <ul class="space-y-3 text-gray-100">
                     <li>
-                        <i class="fas fa-map-marker-alt mr-2"></i>
-                        Abidjan, II Plateaux, Latrille Event
+                        <a href="/confidentialite" class="hover:text-blue-300 transition-colors">
+                            Politique de confidentialité
+                        </a>
                     </li>
                     <li>
-                        <i class="fas fa-phone-alt mr-2"></i>
-                        +225 01 02 03 04 05
+                        <a href="/conditions" class="hover:text-blue-300 transition-colors">
+                            Conditions d'utilisation
+                        </a>
                     </li>
                     <li>
-                        <i class="fas fa-envelope mr-2"></i>
-                        contact@africaqsheforum.com
+                        <a href="/mentions-legales" class="hover:text-blue-300 transition-colors">
+                            Mentions légales
+                        </a>
                     </li>
                 </ul>
-            </div>
-
-            <!-- Social media -->
-            <div class="col-span-1">
-                <h3 class="font-bold mb-4">Suivez-nous</h3>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-300 hover:text-white">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-300 hover:text-white">
-                        <i class="fab fa-youtube text-xl"></i>
-                    </a>
-                </div>
             </div>
         </div>
 
         <!-- Copyright -->
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-300">
-            &copy; {{ "now"|date("Y") }} Africa QSHE Forum. Tous droits réservés.
+        <div class="mt-12 pt-8 border-t border-blue-800 text-center text-sm text-gray-300">
+            © {{ "now"|date("Y") }} Africa QSHE Forum - Tous droits réservés
         </div>
     </div>
 </footer>
