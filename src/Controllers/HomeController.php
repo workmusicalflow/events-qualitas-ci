@@ -19,7 +19,7 @@ class HomeController
             'title' => 'Africa QSHE Forum',
             'description' => 'Bienvenue sur le site officiel du Africa QSHE Forum',
             'menu' => [
-                'logo' => '/images/logo/logo-qshe.svg',
+                'logo' => '/images/logo/logo-qshe-monochrome.svg',
                 'items' => [
                     [
                         'label' => 'Programme',
