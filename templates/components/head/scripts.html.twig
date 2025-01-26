@@ -1,72 +1,172 @@
-{# Scripts externes essentiels #}
-<script src="https://kit.fontawesome.com/01691af9f6.js" crossorigin="anonymous"></script>
+{# GSAP pour les animations #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+{# Alpine.js pour la gestion d'état #}
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-{# Scripts GSAP pour les animations #}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-{# Scripts personnalisés #}
-<script src="/js/banner-animations.js" defer></script>
-
-{# Configuration globale #}
 <script>
-    // Configuration Alpine.js
+    // Configuration des animations du carrousel
     document.addEventListener('alpine:init', () => {
-        Alpine.store('app', {
-            menuOpen: false,
-            darkMode: localStorage.getItem('darkMode') === 'true',
-            toggleDarkMode() {
-                this.darkMode = !this.darkMode;
-                localStorage.setItem('darkMode', this.darkMode);
-                document.documentElement.classList.toggle('dark', this.darkMode);
+        Alpine.data('carouselData', () => ({
+            currentIndex: 0,
+            isAnimating: false,
+            autoplayInterval: null,
+            images: [
+                { src: '/images/banner/slider-pic-0.jpg', webp: '/images/banner/slider-pic-0.webp' },
+                { src: '/images/banner/slider-pic-1.jpg', webp: '/images/banner/slider-pic-1.webp' },
+                { src: '/images/banner/slider-pic-2.jpg', webp: '/images/banner/slider-pic-2.webp' },
+                { src: '/images/banner/slider-pic-3.jpg', webp: '/images/banner/slider-pic-3.webp' },
+                { src: '/images/banner/slider-pic-4.jpg', webp: '/images/banner/slider-pic-4.webp' }
+            ],
+
+            init() {
+                this.preloadImages();
+                this.startAutoplay();
+
+                // Pause l'autoplay au survol
+                this.$watch('$root.matches', value => {
+                    if (value) this.stopAutoplay();
+                    else this.startAutoplay();
+                });
+            },
+
+            preloadImages() {
+                this.images.forEach(image => {
+                    const img = new Image();
+                    img.src = image.src;
+                    if (image.webp) {
+                        const webp = new Image();
+                        webp.src = image.webp;
+                    }
+                });
+            },
+
+            startAutoplay() {
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    this.autoplayInterval = setInterval(() => this.next(), 5000);
+                }
+            },
+
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                }
+            },
+
+            next() {
+                if (this.isAnimating) return;
+                this.isAnimating = true;
+                
+                const currentSlide = this.$refs.slide;
+                const nextIndex = (this.currentIndex + 1) % this.images.length;
+
+                gsap.timeline({
+                    onComplete: () => {
+                        this.currentIndex = nextIndex;
+                        this.isAnimating = false;
+                    }
+                })
+                .to(currentSlide, {
+                    opacity: 0,
+                    x: -50,
+                    duration: 0.5,
+                    ease: 'power2.inOut'
+                })
+                .set(currentSlide, { x: 50 })
+                .to(currentSlide, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
+            },
+
+            prev() {
+                if (this.isAnimating) return;
+                this.isAnimating = true;
+
+                const currentSlide = this.$refs.slide;
+                const prevIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+
+                gsap.timeline({
+                    onComplete: () => {
+                        this.currentIndex = prevIndex;
+                        this.isAnimating = false;
+                    }
+                })
+                .to(currentSlide, {
+                    opacity: 0,
+                    x: 50,
+                    duration: 0.5,
+                    ease: 'power2.inOut'
+                })
+                .set(currentSlide, { x: -50 })
+                .to(currentSlide, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
+            },
+
+            goTo(index) {
+                if (this.isAnimating || index === this.currentIndex) return;
+                
+                const direction = index > this.currentIndex ? 1 : -1;
+                this.isAnimating = true;
+
+                const currentSlide = this.$refs.slide;
+                gsap.timeline({
+                    onComplete: () => {
+                        this.currentIndex = index;
+                        this.isAnimating = false;
+                    }
+                })
+                .to(currentSlide, {
+                    opacity: 0,
+                    x: -50 * direction,
+                    duration: 0.5,
+                    ease: 'power2.inOut'
+                })
+                .set(currentSlide, { x: 50 * direction })
+                .to(currentSlide, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
             }
-        });
+        }));
     });
 
-    // Configuration GSAP globale
-    gsap.config({
-        nullTargetWarn: false,
-        trialWarn: false
-    });
-
-    // Utilitaires globaux
-    window.APP = {
-        debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        },
-
-        isMobile() {
-            return window.innerWidth < 768;
-        },
-
-        isTablet() {
-            return window.innerWidth >= 768 && window.innerWidth < 1024;
-        },
-
-        isDesktop() {
-            return window.innerWidth >= 1024;
-        }
-    };
-
-    // Gestion du chargement des images
+    // Gestion du chargement progressif des images
     document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        images.forEach(img => {
-            img.addEventListener('load', () => {
-                img.classList.add('loaded');
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('loading' in HTMLImageElement.prototype) {
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src;
+                if (img.dataset.srcset) {
+                    img.srcset = img.dataset.srcset;
+                }
             });
-        });
+        } else {
+            // Fallback pour les navigateurs qui ne supportent pas le lazy loading natif
+            const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => lazyImageObserver.observe(img));
+        }
     });
 </script>
-
-{# Scripts spécifiques à la page #}
-{% block page_scripts %}{% endblock %}
