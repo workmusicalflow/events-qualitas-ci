@@ -1,166 +1,20 @@
-{# Section des intervenants #}
-<section class="py-16 bg-gray-50" 
-         x-data="{ hoveredSpeaker: null }"
-         x-init="() => {
-             gsap.from('.speaker-card', {
-                 opacity: 0,
-                 y: 30,
-                 duration: 0.8,
-                 stagger: 0.2,
-                 scrollTrigger: {
-                     trigger: '.speakers-grid',
-                     start: 'top 80%'
-                 }
-             });
-         }">
+{# Section Intervenants #}
+<section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-        {# Titre de la section #}
-        <h2 class="text-3xl font-bold text-center mb-12 flex items-center justify-center">
-            <i class="fas fa-users mr-2 text-blue-900"></i>
-            <span>Nos Intervenants</span>
+        <h2 class="text-3xl font-bold text-center mb-12">
+            <i class="fas fa-users mr-2" aria-hidden="true"></i>Nos Intervenants
         </h2>
-
-        {# Grille des intervenants #}
-        <div class="speakers-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for speaker in speakers %}
-                <div class="speaker-card group relative bg-white rounded-md shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl"
-                     x-on:mouseenter="hoveredSpeaker = {{ loop.index }}"
-                     x-on:mouseleave="hoveredSpeaker = null">
-                    {# Image de l'intervenant #}
-                    <div class="relative overflow-hidden aspect-w-4 aspect-h-3">
-                        <img src="{{ speaker.photo }}" 
-                             alt="{{ speaker.name }}" 
-                             class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                             loading="lazy">
-                        
-                        {# Overlay au survol #}
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-
-                    {# Informations de l'intervenant #}
-                    <div class="p-6 relative">
-                        <h3 class="font-bold text-xl mb-2 text-blue-900 group-hover:text-blue-700 transition-colors duration-300">
-                            {{ speaker.name }}
-                        </h3>
-                        <p class="text-gray-600 mb-1 flex items-center">
-                            <i class="fas fa-briefcase mr-2 text-blue-500"></i>
-                            {{ speaker.position }}
-                        </p>
-                        <p class="text-blue-900 flex items-center">
-                            <i class="fas fa-building mr-2 text-blue-500"></i>
-                            {{ speaker.company }}
-                        </p>
-
-                        {# Badge de spécialité #}
-                        {% if speaker.specialty is defined %}
-                            <span class="absolute top-4 right-4 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                                {{ speaker.specialty }}
-                            </span>
-                        {% endif %}
-                    </div>
-
-                    {# Liens sociaux (apparaissent au survol) #}
-                    {% if speaker.social is defined %}
-                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-blue-900 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <div class="flex justify-center space-x-4">
-                                {% if speaker.social.linkedin is defined %}
-                                    <a href="{{ speaker.social.linkedin }}" 
-                                       target="_blank" 
-                                       rel="noopener noreferrer"
-                                       class="text-white hover:text-blue-200 transition-colors duration-200">
-                                        <i class="fab fa-linkedin text-lg"></i>
-                                    </a>
-                                {% endif %}
-                                {% if speaker.social.twitter is defined %}
-                                    <a href="{{ speaker.social.twitter }}" 
-                                       target="_blank" 
-                                       rel="noopener noreferrer"
-                                       class="text-white hover:text-blue-200 transition-colors duration-200">
-                                        <i class="fab fa-twitter text-lg"></i>
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
+                {% include 'components/cards/speaker_card.html.twig' with { speaker: speaker } %}
             {% endfor %}
         </div>
-
-        {# Bouton "Découvrir la liste complète" #}
         <div class="text-center mt-12">
             <a href="/intervenants" 
-               class="inline-flex items-center bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
-                <i class="fas fa-users mr-2"></i>
+               class="bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg inline-block transition-colors duration-300">
+                <i class="fas fa-users mr-2" aria-hidden="true"></i>
                 <span>Découvrir la liste complète</span>
-                <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </div>
 </section>
-
-{# Styles spécifiques au composant #}
-{% block component_styles %}
-<style>
-    .speaker-card {
-        isolation: isolate;
-    }
-
-    .speaker-card::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(45deg, #3b82f6 0%, #1e40af 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: -1;
-    }
-
-    .speaker-card:hover::after {
-        opacity: 0.1;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .speaker-card,
-        .speaker-card img,
-        .speaker-card::after {
-            transition: none;
-        }
-    }
-</style>
-{% endblock %}
-
-{# Scripts spécifiques au composant #}
-{% block component_scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Animation des cartes au scroll
-        const cards = gsap.utils.toArray('.speaker-card');
-        
-        cards.forEach((card, i) => {
-            gsap.from(card, {
-                opacity: 0,
-                y: 50,
-                rotation: 5,
-                duration: 0.8,
-                delay: i * 0.1,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-        });
-
-        // Animation du titre
-        gsap.from('h2', {
-            opacity: 0,
-            y: -30,
-            duration: 1,
-            scrollTrigger: {
-                trigger: 'h2',
-                start: 'top 80%'
-            }
-        });
-    });
-</script>
-{% endblock %}

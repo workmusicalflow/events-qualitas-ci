@@ -3,51 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
     <title>{% block title %}{{ title }}{% endblock %}</title>
     
-    {# Tailwind avec configuration personnalisée #}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-blue': '#1e3a8a',
-                        'brand-blue-dark': '#172b6c',
-                        'brand-green': '#059669',
-                        'brand-green-dark': '#047857',
-                        'brand-gold': '#fbbf24'
-                    },
-                    fontFamily: {
-                        'barlow': ['"Barlow Condensed"', 'sans-serif'],
-                        'inter': ['Inter', 'sans-serif']
-                    }
-                }
-            },
-            plugins: [],
-        }
-    </script>
+    {# Meta tags #}
+    {% include 'components/head/meta.html.twig' %}
     
-    {# Styles de base avant les styles personnalisés #}
+    {# Tailwind #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    
+    {# Styles de base #}
     {% block stylesheets %}
         {% include 'components/head/styles.html.twig' %}
     {% endblock %}
 
-    {# Scripts #}
+    {# Scripts de base #}
     {% block javascripts %}
         {% include 'components/head/scripts.html.twig' %}
     {% endblock %}
 </head>
-<body class="font-inter">
+<body class="font-inter antialiased">
+    {# Navigation #}
     {% block navigation %}
-        {% include 'components/navigation.html.twig' %}
+        {% include 'components/navigation/main.html.twig' %}
     {% endblock %}
 
-    {% block content %}{% endblock %}
+    {# Contenu principal #}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
+    {# Footer #}
     {% block footer %}
-        {% include 'components/footer.html.twig' %}
+        {% include 'components/footer/main-footer.html.twig' %}
     {% endblock %}
+
+    {# Scripts de fin de page #}
+    {% block page_scripts %}{% endblock %}
 </body>
 </html>

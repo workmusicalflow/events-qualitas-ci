@@ -1,0 +1,31 @@
+{# Section Carte #}
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">
+            <i class="fas fa-map-marked-alt mr-2"></i>Lieu de l'événement
+        </h2>
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254784.89792446525!2d-4.073211346872135!3d5.348666323233466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ea5311959121%3A0x3fe70ddce19221a6!2sAbidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sfr!2sfr!4v1650000000000!5m2!1sfr!2sfr"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        aria-label="Carte Google Maps montrant l'emplacement de l'événement">
+                    </iframe>
+                </div>
+                <div class="p-6 text-center">
+                    <p class="text-xl font-bold text-brand-blue mb-2">
+                        <i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>
+                        {{ event.location.venue }}, {{ event.location.city }}
+                    </p>
+                    <p class="text-gray-600">
+                        <i class="fas fa-calendar-alt mr-2" aria-hidden="true"></i>
+                        {{ event.dates }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
