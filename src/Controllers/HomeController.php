@@ -61,7 +61,20 @@ class HomeController
             'event' => [
                 'year' => '2025',
                 'location' => 'Abidjan, II Plateaux, Latrille Event',
-                'description' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement'
+                'presentation' => [
+                    'intro' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
+                    'description' => 'Un événement majeur dédié au réseautage, à la promotion d\'outils de management innovants et au développement des investissements en Afrique.',
+                    'programme' => [
+                        'Cérémonie d\'ouverture spectaculaire avec performances artistiques et culturelles',
+                        'Exposition interactive avec stands des leaders de l\'industrie QSHE',
+                        'Panels de discussion avec experts internationaux sur les enjeux actuels',
+                        'Sessions de networking structurées pour maximiser les opportunités',
+                        'Conférences thématiques sur l\'innovation et les meilleures pratiques',
+                        'Cérémonie de remise des Prix QSHE Excellence Awards',
+                        'Qualitas Day : journée spéciale dédiée aux certifications et formations'
+                    ],
+                    'objectif' => 'Valoriser l\'excellence en management QSHE tout en encourageant les opérateurs économiques à améliorer leurs politiques pour une croissance durable et compétitive en Afrique.'
+                ]
             ],
             'speakers' => $this->getRandomSpeakers()
         ];
@@ -73,10 +86,10 @@ class HomeController
     {
         $allSpeakers = [
             [
-                'name' => 'John Doe',
+                'name' => 'Mathieu VAILLANT',
                 'company' => 'Quality Corp',
                 'position' => 'Directeur QHSE',
-                'photo' => 'https://via.placeholder.com/300x400?text=John+Doe',
+                'photo' => '/images/speakers/mathieu-VAILLANT.jpg',
                 'specialty' => 'Management QHSE',
                 'social' => [
                     'linkedin' => '#',
@@ -84,10 +97,10 @@ class HomeController
                 ]
             ],
             [
-                'name' => 'Marie Dubois',
+                'name' => 'Marie MICHELLE',
                 'company' => 'Safety First',
                 'position' => 'Experte en Sécurité Industrielle',
-                'photo' => 'https://via.placeholder.com/300x400?text=Marie+Dubois',
+                'photo' => '/images/speakers/marie-MICHELLE.jpg',
                 'specialty' => 'Sécurité',
                 'social' => [
                     'linkedin' => '#'
@@ -97,7 +110,7 @@ class HomeController
                 'name' => 'Ahmed Koné',
                 'company' => 'Green Africa',
                 'position' => 'Responsable Environnement',
-                'photo' => 'https://via.placeholder.com/300x400?text=Ahmed+Kone',
+                'photo' => '/images/speakers/ahmed-kone.jpg',
                 'specialty' => 'Environnement',
                 'social' => [
                     'linkedin' => '#',
@@ -105,31 +118,31 @@ class HomeController
                 ]
             ],
             [
-                'name' => 'Sarah Johnson',
+                'name' => 'Pierre SABRI',
                 'company' => 'Health Solutions',
                 'position' => 'Consultante Santé au Travail',
-                'photo' => 'https://via.placeholder.com/300x400?text=Sarah+Johnson',
+                'photo' => '/images/speakers/pierre-SABRI.jpg',
                 'specialty' => 'Santé',
                 'social' => [
                     'linkedin' => '#'
                 ]
             ],
             [
-                'name' => 'Pierre Kouassi',
+                'name' => 'Rodrigue NGONZO',
                 'company' => 'ISO Consulting',
-                'position' => 'Expert Qualité',
-                'photo' => 'https://via.placeholder.com/300x400?text=Pierre+Kouassi',
-                'specialty' => 'Qualité',
+                'position' => 'Consultant forestier',
+                'photo' => '/images/speakers/rodrigue-NGONZO.jpg',
+                'specialty' => 'Audit',
                 'social' => [
                     'linkedin' => '#',
                     'twitter' => '#'
                 ]
             ],
             [
-                'name' => 'Emma Chen',
-                'company' => 'Global Standards',
-                'position' => 'Directrice Certification',
-                'photo' => 'https://via.placeholder.com/300x400?text=Emma+Chen',
+                'name' => 'Francisca VIUDES',
+                'company' => 'SEER Europe',
+                'position' => 'Présidente',
+                'photo' => '/images/speakers/francisca-VIUDES.jpg',
                 'specialty' => 'Certification',
                 'social' => [
                     'linkedin' => '#'

@@ -49,37 +49,32 @@
                     {# Contenu principal #}
                     <div class="banner-content">
                         <h1 class="banner-title text-4xl md:text-5xl font-bold">
-                            {{ title }} {{ event.date }}
+                            {{ title }} {{ event.year }}
                         </h1>
-                        <p class="banner-description text-xl font-light">
-                            {{ event.description }}
+                        <p class="banner-description text-xl font-light mt-4">
+                            {{ event.presentation.intro }}
                         </p>
-                        <h2 class="banner-theme font-semibold text-yellow-400">
-                            {{ event.theme }}
-                        </h2>
                     </div>
 
                     {# Zone d'informations de l'événement #}
-                    <div class="event-info-box mt-12 p-8 rounded-md">
+                    <div class="event-info-box mt-12 p-8 rounded-md bg-blue-900 bg-opacity-50 backdrop-blur-sm">
                         <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-12">
-                            <div class="event-info-item">
-                                <div class="info-icon text-yellow-400">
+                            <div class="event-info-item flex items-center space-x-4">
+                                <div class="info-icon text-yellow-400 text-2xl">
                                     <i class="fas fa-calendar-alt"></i>
                                 </div>
                                 <div class="text-left">
                                     <span class="block text-sm uppercase tracking-wide text-yellow-200">Date</span>
-                                    <span class="font-bold text-lg">{{ event.date }}</span>
+                                    <span class="font-bold text-lg">{{ event.year }}</span>
                                 </div>
                             </div>
-                            <div class="event-info-item">
-                                <div class="info-icon text-yellow-400">
+                            <div class="event-info-item flex items-center space-x-4">
+                                <div class="info-icon text-yellow-400 text-2xl">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="text-left">
                                     <span class="block text-sm uppercase tracking-wide text-yellow-200">Lieu</span>
-                                    <span class="font-bold text-lg">{{ event.location.name }}</span>
-                                    <span class="block text-sm">{{ event.location.venue }}</span>
-                                    <span class="block text-sm">{{ event.location.address }}</span>
+                                    <span class="font-bold text-lg">{{ event.location }}</span>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +83,7 @@
                     {# Bouton CTA #}
                     <div class="mt-12 cta-button">
                         <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-                           class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-4 px-8 rounded-md inline-flex items-center space-x-2">
+                           class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-4 px-8 rounded-md inline-flex items-center space-x-2 transition-colors duration-300">
                             <i class="fas fa-user-plus"></i>
                             <span>Devenir Exposant</span>
                         </a>
@@ -99,45 +94,7 @@
     </header>
 
     {# Présentation de l'événement #}
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <p class="text-2xl text-gray-700 leading-relaxed mb-8">{{ event.presentation.intro }}</p>
-                    <p class="text-xl text-gray-600 mb-12">{{ event.presentation.details }}</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="bg-blue-50 p-8 rounded-md">
-                        <h3 class="text-xl font-bold text-blue-900 mb-6">
-                            <i class="fas fa-calendar-check mr-2"></i>Au programme
-                        </h3>
-                        <ul class="space-y-4">
-                            {% for item in event.presentation.programme %}
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                    <span class="text-gray-700">{{ item }}</span>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="bg-green-50 p-8 rounded-md">
-                        <h3 class="text-xl font-bold text-green-900 mb-6">
-                            <i class="fas fa-bullseye mr-2"></i>Notre objectif
-                        </h3>
-                        <p class="text-gray-700 leading-relaxed">{{ event.presentation.objectif }}</p>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <a href="https://events-qualitas-ci.com/formulaire.html" 
-                       class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md inline-block">
-                        <i class="fas fa-id-badge mr-2"></i>Générer mon badge de visite
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'components/sections/presentation.html.twig' %}
 
     {# Intervenants #}
     <section class="py-16 bg-gray-50">
@@ -147,7 +104,7 @@
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {% for speaker in speakers %}
-                    <div class="bg-white rounded-md shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                         <img src="{{ speaker.photo }}" alt="{{ speaker.name }}" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="font-bold text-xl mb-2">{{ speaker.name }}</h3>
@@ -162,7 +119,7 @@
                 {% endfor %}
             </div>
             <div class="text-center mt-12">
-                <a href="/intervenants" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md inline-block">
+                <a href="/intervenants" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg inline-block transition-colors duration-300">
                     <i class="fas fa-users mr-2"></i>Découvrir la liste complète
                 </a>
             </div>
@@ -170,26 +127,7 @@
     </section>
 
     {# Partenaires #}
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">
-                <i class="fas fa-handshake mr-2"></i>Nos Partenaires
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center mb-12">
-                {% for i in 1..8 %}
-                    <img src="https://via.placeholder.com/200x100?text=Partenaire+{{ i }}" 
-                         alt="Partenaire {{ i }}" 
-                         class="max-w-[150px] hover:opacity-80 transition-opacity duration-300">
-                {% endfor %}
-            </div>
-            <div class="text-center">
-                <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-                   class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-md inline-block">
-                    <i class="fas fa-handshake mr-2"></i>Devenir Partenaire (Sponsor)
-                </a>
-            </div>
-        </div>
-    </section>
+    {% include 'components/sections/partners.html.twig' %}
 
     {# Plan du lieu #}
     <section class="py-16 bg-gray-50">
@@ -198,7 +136,7 @@
                 <i class="fas fa-map-marked-alt mr-2"></i>Lieu de l'événement
             </h2>
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-md shadow-lg overflow-hidden">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <div class="map-container">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254784.89792446525!2d-4.073211346872135!3d5.348666323233466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ea5311959121%3A0x3fe70ddce19221a6!2sAbidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sfr!2sfr!4v1650000000000!5m2!1sfr!2sfr"
@@ -208,17 +146,11 @@
                         </iframe>
                     </div>
                     <div class="p-6 text-center">
-                        <p class="text-xl font-bold text-blue-900">
-                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.name }}
+                        <p class="text-xl font-bold text-blue-900 mb-2">
+                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location }}
                         </p>
                         <p class="text-gray-600">
-                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.venue }}
-                        </p>
-                        <p class="text-gray-600">
-                            <i class="fas fa-map-marker-alt mr-2"></i>{{ event.location.address }}
-                        </p>
-                        <p class="text-gray-600">
-                            <i class="fas fa-calendar-alt mr-2"></i>{{ event.date }}
+                            <i class="fas fa-calendar-alt mr-2"></i>{{ event.year }}
                         </p>
                     </div>
                 </div>
@@ -227,136 +159,6 @@
     </section>
 
     {# Footer #}
-    <footer class="bg-blue-900 text-white py-16">
-        <div class="container mx-auto px-4">
-            {# Section principale du footer #}
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                {# Colonne 1 : Logo et présentation #}
-                <div>
-                    <div class="h-12 mb-6">
-                        <picture>
-                            <source srcset="/images/logo/logo-qshe-monochrome.svg" type="image/svg+xml">
-                            <img src="/images/logo/logo-qshe-monochrome.png" 
-                                 alt="Logo Africa QSHE Forum" 
-                                 class="h-full w-auto">
-                        </picture>
-                    </div>
-                    <p class="text-blue-200 mb-4">{{ event.description }}</p>
-                    <p class="text-blue-200">Un événement organisé par QUALITAS Côte d'Ivoire SA</p>
-                </div>
-
-                {# Colonne 2 : Adresse et coordonnées postales #}
-                <div>
-                    <h3 class="font-bold text-lg mb-6">
-                        <i class="fas fa-building mr-2"></i>Siège Social
-                    </h3>
-                    <div class="text-blue-200 space-y-3">
-                        <p>
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            Abidjan Biétry, Immeuble le Home
-                        </p>
-                        <p>
-                            <i class="fas fa-mailbox mr-2"></i>
-                            18 BP 1646 Abidjan 18
-                        </p>
-                        <p>
-                            <i class="fas fa-globe-africa mr-2"></i>
-                            Côte d'Ivoire
-                        </p>
-                    </div>
-                </div>
-
-                {# Colonne 3 : Contacts #}
-                <div>
-                    <h3 class="font-bold text-lg mb-6">
-                        <i class="fas fa-address-card mr-2"></i>Contact
-                    </h3>
-                    <div class="text-blue-200 space-y-3">
-                        <p>
-                            <i class="fas fa-phone mr-2"></i>
-                            <span class="font-semibold">Fixe :</span> 
-                            <a href="tel:+22527212416" class="hover:text-white transition-colors">
-                                +225 27 21 24 16 13
-                            </a>
-                        </p>
-                        <p>
-                            <i class="fas fa-mobile-alt mr-2"></i>
-                            <span class="font-semibold">Mobile :</span>
-                            <a href="tel:+22507091300" class="hover:text-white transition-colors">
-                                +225 07 09 13 00 12
-                            </a>
-                        </p>
-                        <p>
-                            <i class="fas fa-envelope mr-2"></i>
-                            <a href="mailto:infosqualitas@gmail.com" class="hover:text-white transition-colors">
-                                infosqualitas@gmail.com
-                            </a>
-                        </p>
-                        <p>
-                            <i class="fas fa-envelope mr-2"></i>
-                            <a href="mailto:info@qualitas-ci.com" class="hover:text-white transition-colors">
-                                info@qualitas-ci.com
-                            </a>
-                        </p>
-                    </div>
-                </div>
-
-                {# Colonne 4 : Liens et réseaux sociaux #}
-                <div>
-                    <h3 class="font-bold text-lg mb-6">
-                        <i class="fas fa-link mr-2"></i>Liens Utiles
-                    </h3>
-                    <div class="text-blue-200 space-y-3">
-                        <p>
-                            <i class="fas fa-globe mr-2"></i>
-                            <a href="https://www.qualitas-ci.com" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               class="hover:text-white transition-colors">
-                                www.qualitas-ci.com
-                            </a>
-                        </p>
-                        <p>
-                            <i class="fas fa-tv mr-2"></i>
-                            <a href="https://www.qualitas.tv" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               class="hover:text-white transition-colors">
-                                www.qualitas.tv
-                            </a>
-                        </p>
-                        <div class="pt-4">
-                            <h4 class="font-semibold mb-3">Suivez-nous</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#" class="text-blue-200 hover:text-white text-2xl transition-colors">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {# Barre de séparation #}
-            <div class="border-t border-blue-800 pt-8">
-                {# Liens légaux et copyright #}
-                <div class="text-center">
-                    <div class="flex justify-center space-x-6 mb-4">
-                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
-                            Mentions légales
-                        </a>
-                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
-                            Politique de confidentialité
-                        </a>
-                        <a href="#" class="text-blue-200 hover:text-white text-sm transition-colors">
-                            Conditions d'utilisation
-                        </a>
-                    </div>
-                    <p class="text-blue-200 text-sm">
-                        <i class="far fa-copyright mr-2"></i>{{ "now"|date
+    {% include 'components/footer.html.twig' %}
+</body>
+</html>
