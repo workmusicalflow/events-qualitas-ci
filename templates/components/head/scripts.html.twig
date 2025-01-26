@@ -5,12 +5,13 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <script>
-    // Configuration des animations du carrousel
     document.addEventListener('alpine:init', () => {
         Alpine.data('carouselData', () => ({
             currentIndex: 0,
+            nextIndex: 1,
             isAnimating: false,
             autoplayInterval: null,
+            isPaused: false,
             images: [
                 { src: '/images/banner/slider-pic-0.jpg', webp: '/images/banner/slider-pic-0.webp' },
                 { src: '/images/banner/slider-pic-1.jpg', webp: '/images/banner/slider-pic-1.webp' },
@@ -19,15 +20,10 @@
                 { src: '/images/banner/slider-pic-4.jpg', webp: '/images/banner/slider-pic-4.webp' }
             ],
 
-            init() {
+            initCarousel() {
                 this.preloadImages();
                 this.startAutoplay();
-
-                // Pause l'autoplay au survol
-                this.$watch('$root.matches', value => {
-                    if (value) this.stopAutoplay();
-                    else this.startAutoplay();
-                });
+                this.setupKeyboardNavigation();
             },
 
             preloadImages() {
@@ -41,132 +37,94 @@
                 });
             },
 
+            setupKeyboardNavigation() {
+                this.$watch('$root.matches', value => {
+                    if (value) {
+                        document.addEventListener('keydown', e => {
+                            if (e.key === 'ArrowLeft') this.prev();
+                            if (e.key === 'ArrowRight') this.next();
+                        });
+                    }
+                });
+            },
+
             startAutoplay() {
-                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !this.isPaused) {
                     this.autoplayInterval = setInterval(() => this.next(), 5000);
                 }
             },
 
-            stopAutoplay() {
+            pauseAutoplay() {
+                this.isPaused = true;
                 if (this.autoplayInterval) {
                     clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
                 }
             },
 
-            next() {
-                if (this.isAnimating) return;
-                this.isAnimating = true;
-                
-                const currentSlide = this.$refs.slide;
-                const nextIndex = (this.currentIndex + 1) % this.images.length;
-
-                gsap.timeline({
-                    onComplete: () => {
-                        this.currentIndex = nextIndex;
-                        this.isAnimating = false;
-                    }
-                })
-                .to(currentSlide, {
-                    opacity: 0,
-                    x: -50,
-                    duration: 0.5,
-                    ease: 'power2.inOut'
-                })
-                .set(currentSlide, { x: 50 })
-                .to(currentSlide, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.5,
-                    ease: 'power2.out'
-                });
+            resumeAutoplay() {
+                this.isPaused = false;
+                this.startAutoplay();
             },
 
-            prev() {
+            async transition(direction) {
                 if (this.isAnimating) return;
                 this.isAnimating = true;
 
-                const currentSlide = this.$refs.slide;
-                const prevIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                const currentSlide = this.$refs.currentSlide;
+                const nextSlide = this.$refs.nextSlide;
+                const xOffset = direction === 'next' ? 100 : -100;
 
-                gsap.timeline({
-                    onComplete: () => {
-                        this.currentIndex = prevIndex;
-                        this.isAnimating = false;
-                    }
-                })
-                .to(currentSlide, {
-                    opacity: 0,
-                    x: 50,
-                    duration: 0.5,
-                    ease: 'power2.inOut'
-                })
-                .set(currentSlide, { x: -50 })
-                .to(currentSlide, {
+                // Prépare la prochaine slide
+                gsap.set(nextSlide, {
+                    x: xOffset,
                     opacity: 1,
+                    zIndex: 2
+                });
+
+                // Animation simultanée des deux slides
+                await gsap.timeline({
+                    defaults: { duration: 0.8, ease: 'power3.inOut' }
+                })
+                .to(currentSlide, {
+                    x: -xOffset,
+                    opacity: 0,
+                    zIndex: 1
+                })
+                .to(nextSlide, {
                     x: 0,
-                    duration: 0.5,
-                    ease: 'power2.out'
+                    zIndex: 2
+                }, '<')
+                .then(() => {
+                    // Reset des positions
+                    gsap.set([currentSlide, nextSlide], {
+                        clearProps: 'all'
+                    });
+
+                    // Mise à jour des indices
+                    this.currentIndex = this.nextIndex;
+                    this.nextIndex = (this.currentIndex + 1) % this.images.length;
+                    this.isAnimating = false;
                 });
             },
 
-            goTo(index) {
+            async next() {
+                this.nextIndex = (this.currentIndex + 1) % this.images.length;
+                await this.transition('next');
+            },
+
+            async prev() {
+                this.nextIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                await this.transition('prev');
+            },
+
+            async goTo(index) {
                 if (this.isAnimating || index === this.currentIndex) return;
                 
-                const direction = index > this.currentIndex ? 1 : -1;
-                this.isAnimating = true;
-
-                const currentSlide = this.$refs.slide;
-                gsap.timeline({
-                    onComplete: () => {
-                        this.currentIndex = index;
-                        this.isAnimating = false;
-                    }
-                })
-                .to(currentSlide, {
-                    opacity: 0,
-                    x: -50 * direction,
-                    duration: 0.5,
-                    ease: 'power2.inOut'
-                })
-                .set(currentSlide, { x: 50 * direction })
-                .to(currentSlide, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.5,
-                    ease: 'power2.out'
-                });
+                this.nextIndex = index;
+                const direction = index > this.currentIndex ? 'next' : 'prev';
+                await this.transition(direction);
             }
         }));
-    });
-
-    // Gestion du chargement progressif des images
-    document.addEventListener('DOMContentLoaded', () => {
-        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        
-        if ('loading' in HTMLImageElement.prototype) {
-            lazyImages.forEach(img => {
-                img.src = img.dataset.src;
-                if (img.dataset.srcset) {
-                    img.srcset = img.dataset.srcset;
-                }
-            });
-        } else {
-            // Fallback pour les navigateurs qui ne supportent pas le lazy loading natif
-            const lazyImageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        if (img.dataset.srcset) {
-                            img.srcset = img.dataset.srcset;
-                        }
-                        img.classList.remove('lazy');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            lazyImages.forEach(img => lazyImageObserver.observe(img));
-        }
     });
 </script>

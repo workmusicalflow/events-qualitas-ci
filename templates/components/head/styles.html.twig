@@ -19,7 +19,6 @@
         color: white;
     }
 
-    /* Force les couleurs de texte dans la bannière */
     .banner-section * {
         color: white;
     }
@@ -37,7 +36,7 @@
         z-index: 1;
     }
 
-    /* Container pour s'assurer que le contenu est au-dessus de l'overlay */
+    /* Container */
     .banner-section .container {
         position: relative;
         z-index: 2;
@@ -75,7 +74,7 @@
         transform: translateY(-2px);
     }
 
-    /* Labels et valeurs dans la carte */
+    /* Labels et valeurs */
     .event-label {
         color: var(--brand-gold) !important;
     }
@@ -102,7 +101,7 @@
         transform: translateY(-2px);
     }
 
-    /* Styles du carrousel */
+    /* Styles du carrousel optimisés */
     .carousel-container {
         position: relative;
         overflow: hidden;
@@ -112,39 +111,41 @@
 
     .carousel-slide {
         will-change: transform, opacity;
+        transform: translateZ(0);
         backface-visibility: hidden;
     }
 
     .carousel-slide img {
-        transform-origin: center center;
+        transform: translateZ(0);
+        backface-visibility: hidden;
         transition: transform 0.5s ease-out;
-    }
-
-    .carousel-slide:hover img {
-        transform: scale(1.05);
     }
 
     /* Contrôles du carrousel */
     .carousel-control {
         opacity: 0;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(4px);
+        transition: opacity 0.3s ease, background-color 0.3s ease;
+        transform: translateZ(0);
     }
 
-    .carousel-container:hover .carousel-control {
+    .carousel-control:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .carousel-container:hover .carousel-control:not(:disabled) {
         opacity: 1;
     }
 
-    .carousel-control:hover {
+    .carousel-control:hover:not(:disabled) {
         background: rgba(0, 0, 0, 0.5);
     }
 
-    /* Indicateurs du carrousel */
+    /* Indicateurs */
     .carousel-indicators {
         backdrop-filter: blur(4px);
         background: rgba(0, 0, 0, 0.2);
-        padding: 0.5rem;
-        border-radius: 1rem;
+        transform: translateZ(0);
     }
 
     .carousel-indicator {
@@ -152,6 +153,11 @@
         height: 8px;
         border-radius: 50%;
         transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .carousel-indicator:disabled {
+        cursor: not-allowed;
     }
 
     .carousel-indicator.active {
@@ -168,12 +174,9 @@
             transition: none !important;
             transform: none !important;
         }
-    }
 
-    /* Support de la réduction de mouvement */
-    @media (prefers-reduced-motion: reduce) {
         .carousel-slide img {
-            transition: none;
+            transition: none !important;
         }
     }
 </style>
