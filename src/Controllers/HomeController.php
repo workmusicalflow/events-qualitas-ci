@@ -60,7 +60,7 @@ class HomeController
             ],
             'event' => [
                 'year' => '2025',
-                'dates' => '15-17 Mai 2025',
+                'dates' => 'Du 08 au 10 Mai 2025',
                 'location' => [
                     'venue' => 'Latrille Event',
                     'area' => 'II Plateaux',
@@ -70,12 +70,11 @@ class HomeController
                     'intro' => 'Le forum international de référence en Afrique pour la Qualité, la Sécurité, la Santé et l\'Environnement',
                     'description' => 'Un événement majeur dédié au réseautage, à la promotion d\'outils de management innovants et au développement des investissements en Afrique.',
                     'theme' => [
-                        'main' => 'Innovation et Excellence QSHE en Afrique',
+                        'main' => 'Accélérer la transition écologique pour une Afrique durable et résiliente:',
                         'pillars' => [
-                            'Qualité',
-                            'Sécurité',
-                            'Santé',
-                            'Environnement'
+                            'innovations',
+                            'stratégies',
+                            'collaborations'
                         ]
                     ],
                     'programme' => [
@@ -90,9 +89,9 @@ class HomeController
                     'objectif' => 'Valoriser l\'excellence en management QSHE tout en encourageant les opérateurs économiques à améliorer leurs politiques pour une croissance durable et compétitive en Afrique.',
                     'highlights' => [
                         'Plus de 500 participants attendus',
-                        '30+ experts internationaux',
-                        '20 pays représentés',
-                        '50 exposants leaders du secteur'
+                        '10+ experts internationaux',
+                        '15 pays représentés',
+                        '40 exposants leaders du secteur'
                     ]
                 ]
             ],
