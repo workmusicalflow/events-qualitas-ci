@@ -1,121 +1,59 @@
 {# Section des partenaires #}
-<section class="py-20 bg-white" aria-labelledby="partners-title">
-    <div class="container mx-auto px-4">
-        {# En-tête de la section #}
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 id="partners-title" class="text-3xl font-bold mb-6">
-                <i class="fas fa-handshake mr-2 text-brand-blue"></i>
-                <span>Nos Partenaires</span>
-            </h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Découvrez les entreprises et organisations qui nous accompagnent dans cette aventure 
-                et contribuent au succès de l'Africa QSHE Forum.
-            </p>
-        </div>
+{% from "components/cards/partner_card.html.twig" import render as partner_card %}
 
-        {# Navigation des catégories #}
-        <div x-data="{ activeCategory: 'all' }"
-             class="mb-16">
-            {# Filtres des catégories #}
-            <div class="flex flex-wrap justify-center gap-4 mb-12" 
-                 role="tablist"
-                 data-aos="fade-up"
-                 data-aos-delay="200">
+<section class="py-16 bg-white" aria-labelledby="partners-title">
+    <div class="container mx-auto px-4">
+        {# En-tête #}
+        <h2 id="partners-title" class="text-3xl font-bold text-center mb-12">
+            <i class="fas fa-handshake mr-2 text-brand-blue"></i>
+            <span>Nos Partenaires</span>
+        </h2>
+
+        {# Filtres des catégories #}
+        <div x-data="{ activeCategory: 'all' }" class="mb-16">
+            <div class="flex flex-wrap justify-center gap-3 mb-12" 
+                 role="tablist">
                 <button @click="activeCategory = 'all'"
                         :class="{ 'bg-brand-blue text-white': activeCategory === 'all', 'bg-gray-100 text-gray-700 hover:bg-gray-200': activeCategory !== 'all' }"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
+                        class="px-4 py-2 rounded-full font-medium transition-all duration-300"
                         role="tab"
-                        aria-selected="true"
-                        aria-controls="all-partners">
-                    Tous les partenaires
+                        aria-controls="all-partners"
+                        :aria-selected="activeCategory === 'all'">
+                    Tous
                 </button>
                 {% for category_key, category in partners.categories %}
                     <button @click="activeCategory = '{{ category_key }}'"
                             :class="{ 'bg-brand-blue text-white': activeCategory === '{{ category_key }}', 'bg-gray-100 text-gray-700 hover:bg-gray-200': activeCategory !== '{{ category_key }}' }"
-                            class="px-6 py-2 rounded-full font-medium transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
+                            class="px-4 py-2 rounded-full font-medium transition-all duration-300"
                             role="tab"
-                            aria-selected="false"
-                            aria-controls="{{ category_key }}-partners">
+                            aria-controls="{{ category_key }}-partners"
+                            :aria-selected="activeCategory === '{{ category_key }}'">
                         {{ category.name }}
                     </button>
                 {% endfor %}
             </div>
 
             {# Grille des partenaires #}
-            <div class="grid gap-8 mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 {% for category_key, category in partners.categories %}
-                    <div x-show="activeCategory === 'all' || activeCategory === '{{ category_key }}'"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform translate-y-4"
-                         x-transition:enter-end="opacity-100 transform translate-y-0"
-                         role="tabpanel"
-                         id="{{ category_key }}-partners"
-                         aria-labelledby="{{ category_key }}-tab">
-                        
-                        {# En-tête de la catégorie #}
-                        <div class="text-center mb-8" x-show="activeCategory === '{{ category_key }}'">
-                            <h3 class="text-2xl font-bold text-brand-blue mb-4">{{ category.name }}</h3>
-                            <p class="text-gray-600">{{ category.description }}</p>
+                    {% for partner in category.partners %}
+                        <div x-show="activeCategory === 'all' || activeCategory === '{{ category_key }}'"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100">
+                            {{ partner_card(partner, category) }}
                         </div>
-
-                        {# Grille des logos #}
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                            {% for partner in category.partners %}
-                                <div class="partner-card group"
-                                     data-aos="fade-up"
-                                     data-aos-delay="{{ loop.index * 100 }}">
-                                    <div class="relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                        {# Logo et informations #}
-                                        <div class="p-6">
-                                            <div class="relative aspect-[3/2] mb-4 overflow-hidden rounded-lg">
-                                                <img src="{{ partner.logo }}" 
-                                                     alt="Logo de {{ partner.name }}"
-                                                     class="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
-                                                     loading="lazy">
-                                            </div>
-                                            
-                                            <div class="space-y-3">
-                                                <h4 class="font-bold text-lg text-gray-900">{{ partner.name }}</h4>
-                                                <p class="text-gray-600 text-sm">{{ partner.description }}</p>
-                                                <p class="text-sm text-brand-blue">{{ partner.contribution }}</p>
-                                            </div>
-                                        </div>
-
-                                        {# Badge de catégorie #}
-                                        <div class="absolute top-4 right-4">
-                                            <span class="bg-gradient-to-r from-brand-{{ category.color }}-600 to-brand-{{ category.color }}-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                                                {{ category.name }}
-                                            </span>
-                                        </div>
-
-                                        {# Lien vers le site #}
-                                        {% if partner.website %}
-                                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <a href="{{ partner.website }}" 
-                                                   class="inline-flex items-center text-white hover:text-brand-gold transition-colors"
-                                                   target="_blank"
-                                                   rel="noopener noreferrer"
-                                                   aria-label="Visiter le site de {{ partner.name }}">
-                                                    <i class="fas fa-external-link-alt mr-2"></i>
-                                                    <span>Visiter le site</span>
-                                                </a>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
             </div>
 
             {# Bouton d'action #}
-            <div class="text-center" data-aos="fade-up">
+            <div class="text-center mt-12">
                 <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-                   class="inline-flex items-center bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
+                   class="inline-flex items-center bg-brand-blue hover:bg-brand-blue-dark text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
                    target="_blank"
                    rel="noopener noreferrer">
-                    <i class="fas fa-handshake mr-2" aria-hidden="true"></i>
+                    <i class="fas fa-handshake mr-2"></i>
                     <span>Devenir Partenaire</span>
                 </a>
             </div>

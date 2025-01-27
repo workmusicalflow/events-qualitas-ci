@@ -9,7 +9,7 @@ use Twig\Loader\FilesystemLoader;
 $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader, [
     'cache' => __DIR__ . '/../var/cache',
-    'auto_reload' => true,
+    'auto_reload' => true
 ]);
 
 // Exemple de routeur basique
@@ -30,5 +30,5 @@ if (class_exists($controllerClass)) {
     $controller->$action();
 } else {
     http_response_code(404);
-    echo $twig->render('404.html.twig');
+    echo $twig->render('pages/404.html.twig');
 }

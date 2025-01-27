@@ -1,0 +1,42 @@
+{# Carte Partenaire #}
+{% macro render(partner, category) %}
+<div class="partner-card group">
+    <div class="relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+        {# Badge de catégorie #}
+        <div class="absolute top-2 right-2 z-10">
+            <span class="bg-gradient-to-r from-brand-{{ category.color }}-600 to-brand-{{ category.color }}-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                {{ category.name }}
+            </span>
+        </div>
+
+        {# Logo #}
+        <div class="p-4">
+            <div class="relative aspect-[3/2] overflow-hidden">
+                {# Image avec fallback #}
+                <img src="{{ partner.logo }}" 
+                     alt="Logo {{ partner.name }}"
+                     class="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='/images/logo/logo-qshe-monochrome.svg';">
+                
+                {# Placeholder pendant le chargement #}
+                <div class="absolute inset-0 flex items-center justify-center bg-gray-50"
+                     x-data="{ show: true }"
+                     x-show="show"
+                     x-init="$nextTick(() => {
+                         const img = $el.previousElementSibling;
+                         if (img.complete) {
+                             show = false;
+                         } else {
+                             img.onload = () => show = false;
+                         }
+                     })">
+                    <img src="/images/logo/logo-qshe-monochrome.svg" 
+                         alt=""
+                         class="w-12 h-12 opacity-20">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
