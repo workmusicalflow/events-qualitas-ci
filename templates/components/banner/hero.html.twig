@@ -1,124 +1,161 @@
 {# Section Bannière #}
-<section class="banner-section py-16" aria-label="Bannière principale du forum">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            {# Contenu Gauche - inchangé #}
-            <div class="banner-content space-y-8">
-                <h1 class="banner-title text-5xl md:text-6xl font-bold" aria-label="Titre principal">
-                    Africa QSHE Forum 2025
-                </h1>
-                
-                <p class="banner-subtitle text-xl" aria-label="Sous-titre">
-                    {{ event.presentation.intro }}
-                </p>
+<section class="banner-section relative min-h-[600px] py-20 overflow-hidden" aria-label="Bannière principale du forum">
+    {# Effet de particules en arrière-plan #}
+    <div class="absolute inset-0 banner-particles opacity-20"></div>
 
-                <div class="theme-box rounded-lg p-6" aria-labelledby="theme-heading">
-                    <h2 id="theme-heading" class="theme-heading text-2xl font-semibold leading-relaxed mb-2">
-                        {{ event.theme.main }}
-                    </h2>
-                    <p class="text-white/80">
-                        {{ event.theme.pillars|join(' • ')|lower }}
+    <div class="container relative z-10 mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            {# Contenu Principal #}
+            <div class="banner-content space-y-8 text-center lg:text-left">
+                {# En-tête #}
+                <div class="space-y-6">
+                    <h1 class="banner-title text-5xl md:text-6xl xl:text-7xl font-bold leading-tight" 
+                        data-aos="fade-up"
+                        data-aos-duration="1000">
+                        Africa QSHE Forum
+                        <span class="block text-brand-gold">2025</span>
+                    </h1>
+                    
+                    <p class="banner-subtitle text-xl md:text-2xl text-white/90" 
+                       data-aos="fade-up"
+                       data-aos-delay="200">
+                        {{ event.presentation.intro }}
                     </p>
                 </div>
 
-                <div class="event-card rounded-lg p-6 space-y-4" role="region" aria-label="Détails de l'événement">
+                {# Thème de l'événement #}
+                <div class="theme-box backdrop-blur-md rounded-xl p-6 transform hover:scale-[1.02] transition-transform duration-300"
+                     data-aos="fade-up"
+                     data-aos-delay="400"
+                     aria-labelledby="theme-heading">
+                    <h2 id="theme-heading" class="theme-heading text-2xl font-semibold leading-relaxed mb-3">
+                        {{ event.presentation.theme.main }}
+                    </h2>
+                    <div class="flex flex-wrap gap-3">
+                        {% for pillar in event.presentation.theme.pillars %}
+                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-sm font-medium">
+                                {{ pillar }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {# Informations de l'événement #}
+                <div class="event-card backdrop-blur-md rounded-xl p-6 space-y-4" 
+                     role="region" 
+                     aria-label="Détails de l'événement"
+                     data-aos="fade-up"
+                     data-aos-delay="600">
+                    {# Date #}
                     <div class="flex items-center gap-4">
                         <div class="icon-container w-12 h-12 flex items-center justify-center rounded-full">
-                            <i class="fas fa-calendar text-2xl"></i>
+                            <i class="fas fa-calendar text-2xl" aria-hidden="true"></i>
                         </div>
                         <div class="event-info">
                             <span class="event-label text-sm uppercase tracking-wider">DATE</span>
-                            <p class="event-value font-medium">{{ event.dates }}</p>
+                            <p class="event-value text-lg font-medium">{{ event.dates }}</p>
                         </div>
                     </div>
 
+                    {# Lieu #}
                     <div class="flex items-center gap-4">
                         <div class="icon-container w-12 h-12 flex items-center justify-center rounded-full">
-                            <i class="fas fa-map-marker-alt text-2xl"></i>
+                            <i class="fas fa-map-marker-alt text-2xl" aria-hidden="true"></i>
                         </div>
                         <div class="event-info">
                             <span class="event-label text-sm uppercase tracking-wider">LIEU</span>
-                            <p class="event-value font-medium">{{ event.location.venue }}, {{ event.location.area }}</p>
+                            <p class="event-value text-lg font-medium">
+                                {{ event.location.venue }}, {{ event.location.area }}
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-4">
+                {# Bouton d'action #}
+                <div class="pt-4" data-aos="fade-up" data-aos-delay="800">
                     <a href="https://events-qualitas-ci.com/qshe25-b2b/public/" 
-                       class="cta-button inline-flex items-center justify-center gap-3 font-bold py-4 px-8 rounded-lg"
-                       aria-label="Devenir exposant">
-                        <i class="fas fa-user-plus"></i>
+                       class="cta-button inline-flex items-center justify-center gap-3 text-lg font-bold py-4 px-8 rounded-xl"
+                       aria-label="Devenir exposant au forum">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
                         <span>Devenir Exposant</span>
                     </a>
                 </div>
             </div>
 
-            {# Carrousel d'Images Amélioré #}
-            <div class="hidden md:block carousel-container" 
+            {# Carrousel d'Images #}
+            <div class="hidden lg:block"
                  x-data="carouselData"
-                 x-init="initCarousel">
-                <div class="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                    {# Container des slides #}
-                    <div class="absolute inset-0">
-                        {# Slide actuelle #}
-                        <div x-ref="currentSlide" 
-                             class="carousel-slide absolute inset-0 w-full h-full">
-                            <picture>
-                                <source :srcset="images[currentIndex].webp" type="image/webp">
-                                <img :src="images[currentIndex].src" 
-                                     :alt="'Image du forum QSHE ' + (currentIndex + 1)"
-                                     class="w-full h-full object-cover"
-                                     loading="eager">
-                            </picture>
+                 x-init="initCarousel"
+                 data-aos="fade-left"
+                 data-aos-delay="200">
+                <div class="carousel-container">
+                    <div class="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                        {# Container des slides #}
+                        <div class="absolute inset-0">
+                            {# Slide actuelle #}
+                            <div x-ref="currentSlide" 
+                                 class="carousel-slide absolute inset-0 w-full h-full">
+                                <picture>
+                                    <source :srcset="images[currentIndex].webp" type="image/webp">
+                                    <img :src="images[currentIndex].src" 
+                                         :alt="'Image du forum QSHE ' + (currentIndex + 1)"
+                                         class="w-full h-full object-cover"
+                                         loading="eager">
+                                </picture>
+                            </div>
+                            
+                            {# Slide suivante #}
+                            <div x-ref="nextSlide" 
+                                 class="carousel-slide absolute inset-0 w-full h-full opacity-0">
+                                <picture>
+                                    <source :srcset="images[nextIndex].webp" type="image/webp">
+                                    <img :src="images[nextIndex].src" 
+                                         :alt="'Image du forum QSHE ' + (nextIndex + 1)"
+                                         class="w-full h-full object-cover"
+                                         loading="eager">
+                                </picture>
+                            </div>
                         </div>
-                        
-                        {# Slide suivante (pour la transition) #}
-                        <div x-ref="nextSlide" 
-                             class="carousel-slide absolute inset-0 w-full h-full opacity-0">
-                            <picture>
-                                <source :srcset="images[nextIndex].webp" type="image/webp">
-                                <img :src="images[nextIndex].src" 
-                                     :alt="'Image du forum QSHE ' + (nextIndex + 1)"
-                                     class="w-full h-full object-cover"
-                                     loading="eager">
-                            </picture>
-                        </div>
-                    </div>
 
-                    {# Overlay gradient #}
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        {# Overlay gradient #}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
 
-                    {# Contrôles de navigation #}
-                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4"
-                         @mouseenter="pauseAutoplay" 
-                         @mouseleave="resumeAutoplay">
-                        <button @click="prev" 
-                                class="carousel-control p-3 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white/50"
-                                :disabled="isAnimating"
-                                aria-label="Image précédente">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button @click="next" 
-                                class="carousel-control p-3 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white/50"
-                                :disabled="isAnimating"
-                                aria-label="Image suivante">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-
-                    {# Indicateurs #}
-                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 carousel-indicators flex space-x-2 px-3 py-2 rounded-full"
-                         @mouseenter="pauseAutoplay" 
-                         @mouseleave="resumeAutoplay">
-                        <template x-for="(image, index) in images" :key="index">
-                            <button @click="goTo(index)"
-                                    class="carousel-indicator"
-                                    :class="{'bg-white scale-110': currentIndex === index, 'bg-white/50': currentIndex !== index}"
+                        {# Contrôles de navigation #}
+                        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4"
+                             @mouseenter="pauseAutoplay" 
+                             @mouseleave="resumeAutoplay">
+                            <button @click="prev" 
+                                    class="carousel-control p-3 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white/50"
                                     :disabled="isAnimating"
-                                    :aria-label="'Aller à l\'image ' + (index + 1)"
-                                    :aria-current="currentIndex === index">
+                                    aria-label="Image précédente">
+                                <i class="fas fa-chevron-left" aria-hidden="true"></i>
                             </button>
-                        </template>
+                            <button @click="next" 
+                                    class="carousel-control p-3 rounded-full bg-black/30 text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                    :disabled="isAnimating"
+                                    aria-label="Image suivante">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        {# Indicateurs #}
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 carousel-indicators flex space-x-2 px-3 py-2 rounded-full"
+                             role="tablist"
+                             aria-label="Navigation des images du carrousel"
+                             @mouseenter="pauseAutoplay" 
+                             @mouseleave="resumeAutoplay">
+                            <template x-for="(image, index) in images" :key="index">
+                                <button @click="goTo(index)"
+                                        class="carousel-indicator"
+                                        :class="{'bg-white scale-110': currentIndex === index, 'bg-white/50': currentIndex !== index}"
+                                        :disabled="isAnimating"
+                                        role="tab"
+                                        :aria-selected="currentIndex === index"
+                                        :aria-label="'Aller à l\'image ' + (index + 1)"
+                                        :aria-current="currentIndex === index">
+                                </button>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </div>
