@@ -96,6 +96,87 @@ class HomeController
                     ]
                 ]
             ],
+            'partners' => [
+                'categories' => [
+                    'institutionnel' => [
+                        'name' => 'Institutionnel',
+                        'color' => 'blue',
+                        'description' => 'Nos partenaires institutionnels qui soutiennent l\'excellence QSHE',
+                        'partners' => [
+                            [
+                                'name' => 'Ministère de l\'Industrie',
+                                'logo' => '/images/partners/institutionnel-0.jpg',
+                                'description' => 'Partenaire officiel gouvernemental',
+                                'website' => 'https://industrie.gouv.ci',
+                                'contribution' => 'Support institutionnel et réglementaire'
+                            ]
+                        ]
+                    ],
+                    'diamond' => [
+                        'name' => 'Diamond',
+                        'color' => 'purple',
+                        'description' => 'Nos partenaires premium qui façonnent l\'avenir du QSHE',
+                        'partners' => [
+                            [
+                                'name' => 'Global Certification',
+                                'logo' => '/images/partners/diamond-0.jpg',
+                                'description' => 'Leader mondial de la certification',
+                                'website' => '#',
+                                'contribution' => 'Expertise en certification et formation'
+                            ]
+                        ]
+                    ],
+                    'gold' => [
+                        'name' => 'Gold',
+                        'color' => 'yellow',
+                        'description' => 'Nos partenaires majeurs engagés pour l\'excellence',
+                        'partners' => [
+                            [
+                                'name' => 'Safety Solutions',
+                                'logo' => '/images/partners/gold-0.jpg',
+                                'description' => 'Expert en solutions de sécurité',
+                                'website' => '#',
+                                'contribution' => 'Solutions innovantes en sécurité'
+                            ],
+                            [
+                                'name' => 'Quality Systems',
+                                'logo' => '/images/partners/gold-1.jpg',
+                                'description' => 'Spécialiste des systèmes qualité',
+                                'website' => '#',
+                                'contribution' => 'Expertise en management de la qualité'
+                            ]
+                        ]
+                    ],
+                    'silver' => [
+                        'name' => 'Silver',
+                        'color' => 'gray',
+                        'description' => 'Nos partenaires clés du développement QSHE',
+                        'partners' => [
+                            [
+                                'name' => 'EcoSolutions Africa',
+                                'logo' => '/images/partners/silver-0.jpg',
+                                'description' => 'Solutions environnementales',
+                                'website' => '#',
+                                'contribution' => 'Expertise environnementale'
+                            ]
+                        ]
+                    ],
+                    'bronze' => [
+                        'name' => 'Bronze',
+                        'color' => 'amber',
+                        'description' => 'Nos partenaires engagés pour le progrès',
+                        'partners' => [
+                            [
+                                'name' => 'Health & Safety First',
+                                'logo' => '/images/partners/bronze-0.jpg',
+                                'description' => 'Spécialiste santé et sécurité',
+                                'website' => '#',
+                                'contribution' => 'Expertise en santé au travail'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
             'speakers' => $this->getRandomSpeakers()
         ];
 
@@ -170,7 +251,6 @@ class HomeController
             ]
         ];
 
-        // Mélanger le tableau et prendre 4 intervenants au hasard
         shuffle($allSpeakers);
         return array_slice($allSpeakers, 0, 4);
     }
