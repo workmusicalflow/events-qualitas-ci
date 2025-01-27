@@ -4,7 +4,7 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
-    /* Variables de couleurs */
+    /* Variables globales */
     :root {
         --brand-blue: #1e3a8a;
         --brand-blue-dark: #172b6c;
@@ -24,20 +24,37 @@
     .banner-particles {
         position: absolute;
         inset: 0;
+        z-index: 1;
+    }
+
+    .banner-particles::before,
+    .banner-particles::after {
+        content: '';
+        position: absolute;
+        inset: -50%;
         background-image: 
-            radial-gradient(circle at 20% 30%, var(--brand-gold) 0.1rem, transparent 0.1rem),
-            radial-gradient(circle at 80% 70%, var(--brand-green) 0.1rem, transparent 0.1rem),
-            radial-gradient(circle at 50% 50%, white 0.05rem, transparent 0.05rem);
+            radial-gradient(circle at 20% 30%, var(--brand-gold) 0.1rem, transparent 0.2rem),
+            radial-gradient(circle at 80% 70%, var(--brand-green) 0.1rem, transparent 0.2rem),
+            radial-gradient(circle at 50% 50%, white 0.05rem, transparent 0.1rem);
         background-size: 4rem 4rem, 3rem 3rem, 2rem 2rem;
         animation: particleFloat 20s linear infinite;
+        opacity: 0.3;
+    }
+
+    .banner-particles::after {
+        animation-direction: reverse;
+        animation-duration: 25s;
+        opacity: 0.2;
+        background-size: 3rem 3rem, 2.5rem 2.5rem, 1.5rem 1.5rem;
+        transform: rotate(30deg);
     }
 
     @keyframes particleFloat {
         0% {
-            transform: translateY(0) rotate(0deg);
+            transform: translate(0, 0) rotate(0deg);
         }
         100% {
-            transform: translateY(-100px) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
         }
     }
 
@@ -197,31 +214,10 @@
         transform: scale(1.2);
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-        .banner-section {
-            text-align: center;
-        }
-
-        .banner-title {
-            font-size: 2.5rem;
-        }
-
-        .banner-subtitle {
-            font-size: 1.25rem;
-        }
-
-        .theme-box,
-        .event-card {
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
     /* Accessibilité */
     @media (prefers-reduced-motion: reduce) {
-        .banner-particles,
+        .banner-particles::before,
+        .banner-particles::after,
         .carousel-slide,
         .carousel-control,
         .carousel-indicator,
