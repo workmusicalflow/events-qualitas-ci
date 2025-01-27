@@ -34,13 +34,14 @@
             </div>
 
             {# Grille des partenaires #}
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 {% for category_key, category in partners.categories %}
                     {% for partner in category.partners %}
                         <div x-show="activeCategory === 'all' || activeCategory === '{{ category_key }}'"
                              x-transition:enter="transition ease-out duration-200"
                              x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100">
+                             x-transition:enter-end="opacity-100 scale-100"
+                             class="w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-20px)]">
                             {{ partner_card(partner, category) }}
                         </div>
                     {% endfor %}
